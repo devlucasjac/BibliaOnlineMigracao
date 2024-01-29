@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { key } from "../../configs";
 
+import Loading from "../Loading/index";
+
 function BibleReader({ bible }) {
   const [chapterNumber, setChapterNumber] = useState("MAT.1");
   const [chapter, setChapter] = useState();
@@ -22,7 +24,7 @@ function BibleReader({ bible }) {
         setChapter(data.data);
       })
       .catch((err) => console(err));
-  }, [chapterNumber]);
+  }, [chapterNumber, bible]);
 
   function changeChapter(e) {
     const valor = e.target.value;
@@ -53,7 +55,7 @@ function BibleReader({ bible }) {
           )}
         </div>
       ) : (
-        <div>Carregando</div>
+        <Loading />
       )}
     </>
   );
