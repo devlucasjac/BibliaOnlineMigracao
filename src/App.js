@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <BibleReader bible="90799bb5b996fddc-01"></BibleReader>
+      <BibleReader bible="acf" book="gn"></BibleReader>
     </div>
   );
 }

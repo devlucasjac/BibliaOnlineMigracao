@@ -1,38 +1,36 @@
 import { useState, useEffect } from "react";
-import { key } from "../../configs";
+import { key, BASE_URL } from "../../configs";
 
 import Loading from "../Loading/index";
+import ShowVerse from "../ShowVerse/index";
 
-function BibleReader({ bible }) {
-  const [chapterNumber, setChapterNumber] = useState("MAT.1");
+function BibleReader({ bible, book }) {
+  const [chapterNumber, setChapterNumber] = useState(1);
   const [chapter, setChapter] = useState();
   const [changed, setChanged] = useState(false);
 
   useEffect(() => {
     console.log(chapterNumber);
-    fetch(
-      `https://api.scripture.api.bible/v1/bibles/${bible}/chapters/${chapterNumber}`,
-      {
-        method: "GET",
-        headers: { "api-key": key },
-      }
-    )
+    fetch(`${BASE_URL}verses/${bible}/${book}/${chapterNumber}`, {
+      method: "GET",
+      //headers: { "api-key": key },
+    })
       .then((resp) => resp.json())
       .then((data) => {
         setChanged(false);
-        console.log(data.data);
-        setChapter(data.data);
+        console.log(data);
+        setChapter(data);
       })
       .catch((err) => console(err));
-  }, [chapterNumber, bible]);
+  }, [chapterNumber, bible, book]);
 
   function changeChapter(e) {
     const valor = e.target.value;
     setChanged(true);
     if (valor === "proximo") {
-      setChapterNumber(chapter.next.id);
+      setChapterNumber(chapterNumber + 1);
     } else {
-      setChapterNumber(chapter.previous.id);
+      setChapterNumber(chapterNumber - 1);
     }
   }
 
@@ -40,9 +38,13 @@ function BibleReader({ bible }) {
     <>
       {chapter ? (
         <div>
-          <article
-            dangerouslySetInnerHTML={{ __html: chapter.content }}
-          ></article>
+          <h2>Capitulo:{chapterNumber}</h2>
+          <article>
+            {chapter.verses.map((verse) => (
+              <ShowVerse verse={verse} />
+            ))}
+          </article>
+
           {!changed && (
             <>
               <button value="anterior" onClick={changeChapter}>
@@ -62,3 +64,8 @@ function BibleReader({ bible }) {
 }
 
 export default BibleReader;
+/*     {chapter.content.attrs.style === "s"
+            ? chapter.content.items.map((item) => <h1>{item.text}</h1>)
+            : chapter.content.items.map((item) => <p>{item.items.text}</p>)}
+          <article>{chapter.content}</article>*/
+//dangerouslySetInnerHTML={{ __html: chapter.content }}
