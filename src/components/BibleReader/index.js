@@ -1,33 +1,52 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { key, BASE_URL } from "../../configs";
+
+import CurrentBook from "../../context/CurrentBook";
 
 import Loading from "../Loading/index";
 import ShowVerse from "../ShowVerse/index";
 
-function BibleReader({ bible, book }) {
-  const [chapterNumber, setChapterNumber] = useState(1);
+function BibleReader({ lastChapter }) {
+  const { currentBook, setCurrentBook } = useContext(CurrentBook);
+
+  const [chapterNumber, setChapterNumber] = useState(currentBook.chapterNum);
   const [chapter, setChapter] = useState();
   const [changed, setChanged] = useState(false);
 
   useEffect(() => {
     console.log(chapterNumber);
-    fetch(`${BASE_URL}verses/${bible}/${book}/${chapterNumber}`, {
-      method: "GET",
-      //headers: { "api-key": key },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open(
+      "GET",
+      BASE_URL +
+        "get-text/" +
+        currentBook.bible +
+        "/" +
+        currentBook.book +
+        "/" +
+        chapterNumber +
+        "/"
+    );
+    xhr.send();
+    xhr.onload = () => {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        const data = xhr.response;
         setChanged(false);
-        console.log(data);
-        setChapter(data);
-      })
-      .catch((err) => console(err));
-  }, [chapterNumber, bible, book]);
+        setChapter(JSON.parse(data));
+      } else {
+        console.log(`Error: ${xhr.status}`);
+      }
+    };
+  }, [chapterNumber, currentBook]);
 
   function changeChapter(e) {
     const valor = e.target.value;
     setChanged(true);
     if (valor === "proximo") {
+      if (chapterNumber === lastChapter) {
+        console.log("mesmo numero");
+        return;
+      }
       setChapterNumber(chapterNumber + 1);
     } else {
       setChapterNumber(chapterNumber - 1);
@@ -40,7 +59,7 @@ function BibleReader({ bible, book }) {
         <div>
           <h2>Capitulo:{chapterNumber}</h2>
           <article>
-            {chapter.verses.map((verse) => (
+            {chapter.map((verse) => (
               <ShowVerse verse={verse} />
             ))}
           </article>
@@ -64,8 +83,3 @@ function BibleReader({ bible, book }) {
 }
 
 export default BibleReader;
-/*     {chapter.content.attrs.style === "s"
-            ? chapter.content.items.map((item) => <h1>{item.text}</h1>)
-            : chapter.content.items.map((item) => <p>{item.items.text}</p>)}
-          <article>{chapter.content}</article>*/
-//dangerouslySetInnerHTML={{ __html: chapter.content }}
