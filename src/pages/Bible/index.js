@@ -12,8 +12,8 @@ function Bible() {
   const [books, setBooks] = useState();
   const [currentBook, setCurrentBook] = useState({
     bible: "ARA",
-    book: 3,
-    chapterNum: 1,
+    book: 1,
+    chapterNum: 50,
   });
 
   useEffect(() => {
@@ -24,7 +24,6 @@ function Bible() {
       if (request.readyState === 4 && request.status === 200) {
         const data = request.response;
         setBooks(JSON.parse(data));
-        console.log(books);
       } else {
         console.log(`Error: ${request.status}`);
       }

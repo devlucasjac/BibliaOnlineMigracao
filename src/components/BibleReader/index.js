@@ -13,7 +13,11 @@ function BibleReader() {
 
   const [chapter, setChapter] = useState();
 
-  const book = books.find((book) => book.bookid === currentBook.book);
+  function findBook(bookId) {
+    return books.find((book) => book.bookid === bookId);
+  }
+
+  const book = findBook(currentBook.book);
 
   useEffect(() => {
     const xhr = new XMLHttpRequest();
@@ -33,7 +37,21 @@ function BibleReader() {
       if (xhr.readyState === 4 && xhr.status === 200) {
         const data = xhr.response;
         if (data === "[]") {
+          if (currentBook.chapterNum > book.chapters) {
+            setCurrentBook({
+              ...currentBook,
+              book: currentBook.book + 1,
+              chapterNum: 1,
+            });
+          } else {
+            setCurrentBook({
+              ...currentBook,
+              book: currentBook.book - 1,
+              chapterNum: findBook(currentBook.book - 1).chapters,
+            });
+          }
           console.log(data);
+          console.log(book);
         } else {
           setChapter(JSON.parse(data));
         }
@@ -71,14 +89,12 @@ function BibleReader() {
             ))}
           </article>
 
-          <>
-            <button value="anterior" onClick={changeChapter}>
-              Anterior
-            </button>
-            <button value="proximo" onClick={changeChapter}>
-              Proximo
-            </button>
-          </>
+          <button value="anterior" onClick={changeChapter}>
+            Anterior
+          </button>
+          <button value="proximo" onClick={changeChapter}>
+            Proximo
+          </button>
         </div>
       ) : (
         <Loading />
