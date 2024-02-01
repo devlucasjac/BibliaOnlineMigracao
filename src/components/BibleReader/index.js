@@ -36,25 +36,7 @@ function BibleReader() {
     xhr.onload = () => {
       if (xhr.readyState === 4 && xhr.status === 200) {
         const data = xhr.response;
-        if (data === "[]") {
-          if (currentBook.chapterNum > book.chapters) {
-            setCurrentBook({
-              ...currentBook,
-              book: currentBook.book + 1,
-              chapterNum: 1,
-            });
-          } else {
-            setCurrentBook({
-              ...currentBook,
-              book: currentBook.book - 1,
-              chapterNum: findBook(currentBook.book - 1).chapters,
-            });
-          }
-          console.log(data);
-          console.log(book);
-        } else {
-          setChapter(JSON.parse(data));
-        }
+        setChapter(JSON.parse(data));
       } else {
         console.log(`Error: ${xhr.status}`);
       }
@@ -63,17 +45,32 @@ function BibleReader() {
 
   function changeChapter(e) {
     const valor = e.target.value;
-
     if (valor === "proximo") {
-      setCurrentBook({
-        ...currentBook,
-        chapterNum: currentBook.chapterNum + 1,
-      });
+      if (currentBook.chapterNum === book.chapters) {
+        setCurrentBook({
+          ...currentBook,
+          book: currentBook.book + 1,
+          chapterNum: 1,
+        });
+      } else {
+        setCurrentBook({
+          ...currentBook,
+          chapterNum: currentBook.chapterNum + 1,
+        });
+      }
     } else {
-      setCurrentBook({
-        ...currentBook,
-        chapterNum: currentBook.chapterNum - 1,
-      });
+      if (currentBook.chapterNum === 1) {
+        setCurrentBook({
+          ...currentBook,
+          book: currentBook.book - 1,
+          chapterNum: findBook(currentBook.book - 1).chapters,
+        });
+      } else {
+        setCurrentBook({
+          ...currentBook,
+          chapterNum: currentBook.chapterNum - 1,
+        });
+      }
     }
   }
 
@@ -83,18 +80,35 @@ function BibleReader() {
         <div>
           <h2>Livro:{book.name}</h2>
           <h3>Capitulo:{currentBook.chapterNum}</h3>
+          <button
+            value="anterior"
+            onClick={changeChapter}
+            disabled={
+              currentBook.book === 1 && currentBook.chapterNum === 1
+                ? true
+                : false
+            }
+          >
+            Anterior
+          </button>
+
+          <button
+            value="proximo"
+            onClick={changeChapter}
+            disabled={
+              currentBook.book === books[books.length - 1].bookid &&
+              currentBook.chapterNum === book.chapters
+                ? true
+                : false
+            }
+          >
+            Proximo
+          </button>
           <article>
             {chapter.map((verse) => (
               <ShowVerse verse={verse} key={verse.id} />
             ))}
           </article>
-
-          <button value="anterior" onClick={changeChapter}>
-            Anterior
-          </button>
-          <button value="proximo" onClick={changeChapter}>
-            Proximo
-          </button>
         </div>
       ) : (
         <Loading />

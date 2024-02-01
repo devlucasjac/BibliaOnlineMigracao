@@ -13,7 +13,7 @@ function Bible() {
   const [currentBook, setCurrentBook] = useState({
     bible: "ARA",
     book: 1,
-    chapterNum: 50,
+    chapterNum: 1,
   });
 
   useEffect(() => {
