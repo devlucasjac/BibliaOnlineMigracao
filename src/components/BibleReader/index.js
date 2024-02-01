@@ -1,20 +1,21 @@
 import { useState, useEffect, useContext } from "react";
-import { key, BASE_URL } from "../../configs";
+import { BASE_URL } from "../../configs";
 
 import CurrentBook from "../../context/CurrentBook";
+import Books from "../../context/Books";
 
 import Loading from "../Loading/index";
 import ShowVerse from "../ShowVerse/index";
 
-function BibleReader({ lastChapter }) {
+function BibleReader() {
   const { currentBook, setCurrentBook } = useContext(CurrentBook);
+  const { books, setBooks } = useContext(Books);
 
-  const [chapterNumber, setChapterNumber] = useState(currentBook.chapterNum);
   const [chapter, setChapter] = useState();
-  const [changed, setChanged] = useState(false);
+
+  const book = books.find((book) => book.bookid === currentBook.book);
 
   useEffect(() => {
-    console.log(chapterNumber);
     const xhr = new XMLHttpRequest();
     xhr.open(
       "GET",
@@ -24,32 +25,37 @@ function BibleReader({ lastChapter }) {
         "/" +
         currentBook.book +
         "/" +
-        chapterNumber +
+        currentBook.chapterNum +
         "/"
     );
     xhr.send();
     xhr.onload = () => {
       if (xhr.readyState === 4 && xhr.status === 200) {
         const data = xhr.response;
-        setChanged(false);
-        setChapter(JSON.parse(data));
+        if (data === "[]") {
+          console.log(data);
+        } else {
+          setChapter(JSON.parse(data));
+        }
       } else {
         console.log(`Error: ${xhr.status}`);
       }
     };
-  }, [chapterNumber, currentBook]);
+  }, [currentBook]);
 
   function changeChapter(e) {
     const valor = e.target.value;
-    setChanged(true);
+
     if (valor === "proximo") {
-      if (chapterNumber === lastChapter) {
-        console.log("mesmo numero");
-        return;
-      }
-      setChapterNumber(chapterNumber + 1);
+      setCurrentBook({
+        ...currentBook,
+        chapterNum: currentBook.chapterNum + 1,
+      });
     } else {
-      setChapterNumber(chapterNumber - 1);
+      setCurrentBook({
+        ...currentBook,
+        chapterNum: currentBook.chapterNum - 1,
+      });
     }
   }
 
@@ -57,23 +63,22 @@ function BibleReader({ lastChapter }) {
     <>
       {chapter ? (
         <div>
-          <h2>Capitulo:{chapterNumber}</h2>
+          <h2>Livro:{book.name}</h2>
+          <h3>Capitulo:{currentBook.chapterNum}</h3>
           <article>
             {chapter.map((verse) => (
-              <ShowVerse verse={verse} />
+              <ShowVerse verse={verse} key={verse.id} />
             ))}
           </article>
 
-          {!changed && (
-            <>
-              <button value="anterior" onClick={changeChapter}>
-                Anterior
-              </button>
-              <button value="proximo" onClick={changeChapter}>
-                Proximo
-              </button>
-            </>
-          )}
+          <>
+            <button value="anterior" onClick={changeChapter}>
+              Anterior
+            </button>
+            <button value="proximo" onClick={changeChapter}>
+              Proximo
+            </button>
+          </>
         </div>
       ) : (
         <Loading />
