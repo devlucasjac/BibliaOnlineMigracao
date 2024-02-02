@@ -9,7 +9,7 @@ import ShowVerse from "../ShowVerse/index";
 
 function BibleReader() {
   const { currentBook, setCurrentBook } = useContext(CurrentBook);
-  const { books, setBooks } = useContext(Books);
+  const { books } = useContext(Books);
 
   const [chapter, setChapter] = useState();
 

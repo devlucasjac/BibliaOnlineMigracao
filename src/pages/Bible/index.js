@@ -1,5 +1,6 @@
 import BibleReader from "../../components/BibleReader/index";
-import Loading from "../../components/Loading";
+import Loading from "../../components/Loading/index";
+import RandomVerse from "../../components/RandomVerse/index";
 
 import CurrentBook from "../../context/CurrentBook";
 import Books from "../../context/Books";
@@ -28,13 +29,20 @@ function Bible() {
         console.log(`Error: ${request.status}`);
       }
     };
-  }, [currentBook]);
+  }, [currentBook.bible]);
 
   return (
     <div>
       <CurrentBook.Provider value={{ currentBook, setCurrentBook }}>
         <Books.Provider value={{ books, setBooks }}>
-          {books ? <BibleReader lastChapter={50}></BibleReader> : <Loading />}
+          {books ? (
+            <>
+              <RandomVerse />
+              <BibleReader lastChapter={50}></BibleReader>{" "}
+            </>
+          ) : (
+            <Loading />
+          )}
         </Books.Provider>
       </CurrentBook.Provider>
     </div>
