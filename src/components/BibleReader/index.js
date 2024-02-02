@@ -1,6 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { BASE_URL } from "../../configs";
 
+import Paginator from "../Paginator/index";
+
 import CurrentBook from "../../context/CurrentBook";
 import Books from "../../context/Books";
 
@@ -43,64 +45,13 @@ function BibleReader() {
     };
   }, [currentBook]);
 
-  function changeChapter(e) {
-    const valor = e.target.value;
-    if (valor === "proximo") {
-      if (currentBook.chapterNum === book.chapters) {
-        setCurrentBook({
-          ...currentBook,
-          book: currentBook.book + 1,
-          chapterNum: 1,
-        });
-      } else {
-        setCurrentBook({
-          ...currentBook,
-          chapterNum: currentBook.chapterNum + 1,
-        });
-      }
-    } else {
-      if (currentBook.chapterNum === 1) {
-        setCurrentBook({
-          ...currentBook,
-          book: currentBook.book - 1,
-          chapterNum: findBook(currentBook.book - 1).chapters,
-        });
-      } else {
-        setCurrentBook({
-          ...currentBook,
-          chapterNum: currentBook.chapterNum - 1,
-        });
-      }
-    }
-  }
-
   return (
     <>
       {chapter ? (
         <div>
           <h2>Livro:{book.name}</h2>
           <h3>Capitulo:{currentBook.chapterNum}</h3>
-          <button
-            value="anterior"
-            onClick={changeChapter}
-            disabled={
-              currentBook.book === 1 && currentBook.chapterNum === 1 && true
-            }
-          >
-            Anterior
-          </button>
-
-          <button
-            value="proximo"
-            onClick={changeChapter}
-            disabled={
-              currentBook.book === books[books.length - 1].bookid &&
-              currentBook.chapterNum === book.chapters &&
-              true
-            }
-          >
-            Proximo
-          </button>
+          <Paginator findBook={findBook} />
           <article>
             {chapter.map((verse) => (
               <ShowVerse verse={verse} key={verse.id} />
