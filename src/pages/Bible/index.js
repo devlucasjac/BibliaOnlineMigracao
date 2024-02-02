@@ -38,7 +38,7 @@ function Bible() {
           {books ? (
             <>
               <RandomVerse />
-              <BibleReader lastChapter={50}></BibleReader>{" "}
+              <BibleReader />
             </>
           ) : (
             <Loading />
