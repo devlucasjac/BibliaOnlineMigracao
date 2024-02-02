@@ -1,15 +1,14 @@
-import Bible from "./pages/Bible/index";
-import CurrentBook from "./context/CurrentBook";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 
-import "./App.css";
+import Bible from "./pages/Bible/index";
 
 function App() {
   return (
-    <div className="App">
-      <CurrentBook.Provider>
-        <Bible></Bible>
-      </CurrentBook.Provider>
-    </div>
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<Bible />} />
+      </Routes>
+    </Router>
   );
 }
 

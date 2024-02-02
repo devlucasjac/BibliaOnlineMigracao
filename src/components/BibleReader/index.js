@@ -84,9 +84,7 @@ function BibleReader() {
             value="anterior"
             onClick={changeChapter}
             disabled={
-              currentBook.book === 1 && currentBook.chapterNum === 1
-                ? true
-                : false
+              currentBook.book === 1 && currentBook.chapterNum === 1 && true
             }
           >
             Anterior
@@ -97,9 +95,8 @@ function BibleReader() {
             onClick={changeChapter}
             disabled={
               currentBook.book === books[books.length - 1].bookid &&
-              currentBook.chapterNum === book.chapters
-                ? true
-                : false
+              currentBook.chapterNum === book.chapters &&
+              true
             }
           >
             Proximo
