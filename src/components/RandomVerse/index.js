@@ -15,7 +15,7 @@ function RandomVerse() {
   const { books } = useContext(Books);
 
   const getRandom = (maxNumber) => {
-    return Math.floor(Math.random() * maxNumber);
+    return Math.floor(Math.random() * maxNumber) + 1;
   };
 
   const [randBook] = useState(() => {

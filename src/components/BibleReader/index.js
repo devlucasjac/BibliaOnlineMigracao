@@ -78,6 +78,15 @@ function BibleReader() {
     <>
       {chapter ? (
         <div>
+          <button
+            onClick={() => {
+              window.localStorage.setItem("Bible", currentBook.bible);
+              window.localStorage.setItem("Book", currentBook.book);
+              window.localStorage.setItem("ChapterNum", currentBook.chapterNum);
+            }}
+          >
+            Marcar Pagina
+          </button>
           <h2>Livro:{book.name}</h2>
           <h3>Capitulo:{currentBook.chapterNum}</h3>
           <button
