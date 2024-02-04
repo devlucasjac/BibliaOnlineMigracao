@@ -3,13 +3,15 @@ import CurrentBook from "../../context/CurrentBook";
 
 import Loading from "../Loading/index";
 
+import { BASE_URL } from "../../configs";
+
 function BibleSelector({ showSelector }) {
   const { currentBook, setCurrentBook } = useContext(CurrentBook);
   const [bibles, setBibles] = useState();
 
   useEffect(() => {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://bolls.life/static/bolls/app/views/languages.json");
+    xhr.open("GET", BASE_URL + "static/bolls/app/views/languages.json");
     xhr.send();
     xhr.onload = () => {
       if (xhr.readyState === 4 && xhr.status === 200) {
@@ -25,7 +27,9 @@ function BibleSelector({ showSelector }) {
     setCurrentBook({
       ...currentBook,
       bible: e.target.value,
+      book: 1,
     });
+
     showSelector(false);
   }
 

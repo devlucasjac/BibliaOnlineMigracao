@@ -39,7 +39,7 @@ function Bible() {
         console.log(`Error: ${request.status}`);
       }
     };
-  }, [currentBook.bible]);
+  }, [currentBook]);
 
   return (
     <div>
@@ -47,7 +47,6 @@ function Bible() {
         <Books.Provider value={{ books, setBooks }}>
           {books ? (
             <>
-              <RandomVerse />
               <BibleReader />
             </>
           ) : (

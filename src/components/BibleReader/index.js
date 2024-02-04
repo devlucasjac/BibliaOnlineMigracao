@@ -15,7 +15,11 @@ function BibleReader() {
   const [chapter, setChapter] = useState();
 
   function findBook(bookId) {
-    return books.find((book) => book.bookid === bookId);
+    let findedBook = books.find((book) => book.bookid === bookId);
+    if (findedBook === undefined) {
+      setCurrentBook({ ...currentBook, book: 40 });
+    }
+    return findedBook;
   }
 
   const book = findBook(currentBook.book);
@@ -77,7 +81,7 @@ function BibleReader() {
 
   return (
     <>
-      {chapter ? (
+      {chapter && book ? (
         <div>
           <HeaderBible />
           <h2>
