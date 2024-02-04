@@ -3,6 +3,7 @@ import { useState } from "react";
 import Modal from "@mui/material/Modal";
 
 import BibleSelector from "../BibleSelector/index";
+import BookSelector from "../BookSelector/index";
 
 function HeaderBible() {
   const [showBibleSelection, setShowBibleSelection] = useState(false);
@@ -33,6 +34,7 @@ function HeaderBible() {
         <>
           <button onClick={() => setShowBookSelection(false)}>Fechar</button>
           <p>Livro</p>
+          <BookSelector showSelector={setShowBookSelection} />
         </>
       </Modal>
       <button onClick={() => setShowChapterSelection(true)}>Capitulo</button>
