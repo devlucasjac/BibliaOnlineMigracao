@@ -6,6 +6,7 @@ import Books from "../../context/Books";
 
 import Loading from "../Loading/index";
 import ShowVerse from "../ShowVerse/index";
+import HeaderBible from "../HeaderBible/index";
 
 function BibleReader() {
   const { currentBook, setCurrentBook } = useContext(CurrentBook);
@@ -78,6 +79,10 @@ function BibleReader() {
     <>
       {chapter ? (
         <div>
+          <HeaderBible />
+          <h2>
+            {book.name}: {currentBook.chapterNum}
+          </h2>
           <button
             onClick={() => {
               window.localStorage.setItem("Bible", currentBook.bible);
@@ -87,8 +92,11 @@ function BibleReader() {
           >
             Marcar Pagina
           </button>
-          <h2>Livro:{book.name}</h2>
-          <h3>Capitulo:{currentBook.chapterNum}</h3>
+          <article>
+            {chapter.map((verse) => (
+              <ShowVerse verse={verse} key={verse.id} />
+            ))}
+          </article>
           <button
             value="anterior"
             onClick={changeChapter}
@@ -110,11 +118,6 @@ function BibleReader() {
           >
             Proximo
           </button>
-          <article>
-            {chapter.map((verse) => (
-              <ShowVerse verse={verse} key={verse.id} />
-            ))}
-          </article>
         </div>
       ) : (
         <Loading />
