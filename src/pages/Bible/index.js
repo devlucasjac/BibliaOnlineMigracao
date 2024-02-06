@@ -47,6 +47,7 @@ function Bible() {
         <Books.Provider value={{ books, setBooks }}>
           {books ? (
             <>
+              <RandomVerse />
               <BibleReader />
             </>
           ) : (

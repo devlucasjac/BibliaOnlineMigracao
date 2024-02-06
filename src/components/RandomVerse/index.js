@@ -14,42 +14,9 @@ function RandomVerse() {
   const { currentBook } = useContext(CurrentBook);
   const { books } = useContext(Books);
 
-  const getRandom = (maxNumber) => {
-    return Math.floor(Math.random() * maxNumber) + 1;
-  };
-
-  const [randBook] = useState(() => {
-    const book = books[getRandom(books.length)];
-    if (book !== undefined) {
-      return book.bookid;
-    } else {
-      return 18;
-    }
-  });
-  const [randChapter] = useState(() => {
-    if (books[randBook - 1].chapters !== undefined) {
-      return getRandom(books[randBook - 1].chapters);
-    } else {
-      return 1;
-    }
-  });
-  const randVerse = getRandom(10);
-
   useEffect(() => {
     const xhr = new XMLHttpRequest();
-    xhr.open(
-      "GET",
-      BASE_URL +
-        "get-verse/" +
-        currentBook.bible +
-        "/" +
-        randBook +
-        "/" +
-        randChapter +
-        "/" +
-        randVerse +
-        "/"
-    );
+    xhr.open("GET", BASE_URL + "get-random-verse/" + currentBook.bible + "/");
     xhr.send();
     xhr.onload = () => {
       if (xhr.readyState === 4 && xhr.status === 200) {
@@ -59,14 +26,18 @@ function RandomVerse() {
         console.log(`Error: ${xhr.status}`);
       }
     };
-  }, []);
+  }, [currentBook]);
+
+  const findBook = (bookid) => {
+    return books.find((book) => book.bookid === bookid).name;
+  };
 
   return (
     <section>
       {verse ? (
         <>
-          <h4>Livro:{books[randBook].name}</h4>
-          <h5>Capitulo:{randChapter}</h5>
+          <h4>Livro:{findBook(verse.book)}</h4>
+          <h5>Capitulo:{verse.chapter}</h5>
           <ShowVerse verse={verse} />
         </>
       ) : (
