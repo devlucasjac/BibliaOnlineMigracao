@@ -26,11 +26,11 @@ function RandomVerse() {
         console.log(`Error: ${xhr.status}`);
       }
     };
-  }, [currentBook]);
+  }, [currentBook.bible]);
 
-  const findBook = (bookid) => {
+  function findBook(bookid) {
     return books.find((book) => book.bookid === bookid).name;
-  };
+  }
 
   return (
     <section>

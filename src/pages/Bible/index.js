@@ -39,7 +39,7 @@ function Bible() {
         console.log(`Error: ${request.status}`);
       }
     };
-  }, [currentBook]);
+  }, [currentBook.bible]);
 
   return (
     <div>
