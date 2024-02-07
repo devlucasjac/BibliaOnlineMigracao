@@ -81,7 +81,7 @@ function BibleReader() {
 
   return (
     <>
-      {chapter ? (
+      {chapter && book ? (
         <div>
           <HeaderBible />
           <h2>

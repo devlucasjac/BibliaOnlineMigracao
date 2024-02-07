@@ -29,14 +29,17 @@ function RandomVerse() {
   }, [currentBook.bible]);
 
   function findBook(bookid) {
-    return books.find((book) => book.bookid === bookid).name;
+    if (books.find((book) => book.bookid === bookid) === undefined) {
+      return "livro não encontrado 😢";
+    }
+    return books.find((book) => book.bookid === bookid);
   }
 
   return (
     <section>
       {verse ? (
         <>
-          <h4>Livro:{findBook(verse.book)}</h4>
+          <h4>Livro:{findBook(verse.book).name}</h4>
           <h5>Capitulo:{verse.chapter}</h5>
           <ShowVerse verse={verse} />
         </>

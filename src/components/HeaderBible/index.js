@@ -4,6 +4,7 @@ import Modal from "@mui/material/Modal";
 
 import BibleSelector from "../BibleSelector/index";
 import BookSelector from "../BookSelector/index";
+import ChapterSelector from "../ChapterSelector";
 
 function HeaderBible() {
   const [showBibleSelection, setShowBibleSelection] = useState(false);
@@ -44,7 +45,7 @@ function HeaderBible() {
       >
         <>
           <button onClick={() => setShowChapterSelection(false)}>Fechar</button>
-          <p>Capitulo</p>
+          <ChapterSelector showSelector={setShowChapterSelection} />
         </>
       </Modal>
     </div>
