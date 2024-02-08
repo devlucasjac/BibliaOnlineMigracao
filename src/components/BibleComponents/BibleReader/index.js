@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from "react";
-import { BASE_URL } from "../../configs";
+import { BASE_URL } from "../../../configs";
 
-import CurrentBook from "../../context/CurrentBook";
-import Books from "../../context/Books";
+import CurrentBook from "../../../context/CurrentBook";
+import Books from "../../../context/Books";
 
-import Loading from "../Loading/index";
+import Loading from "../../GeneralComponents/Loading/index";
 import ShowVerse from "../ShowVerse/index";
 import HeaderBible from "../HeaderBible/index";
 

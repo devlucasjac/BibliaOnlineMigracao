@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 
-import CurrentBook from "../../context/CurrentBook";
+import CurrentBook from "../../../context/CurrentBook";
 
-import Loading from "../Loading/index";
+import Loading from "../../GeneralComponents/Loading/index";
 
-import { BASE_URL } from "../../configs";
+import { BASE_URL } from "../../../configs";
 
 function BookSelector({ showSelector }) {
   const { currentBook, setCurrentBook } = useContext(CurrentBook);

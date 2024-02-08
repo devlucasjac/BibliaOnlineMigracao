@@ -1,4 +1,4 @@
-import spinner from "../../img/Spinner.gif";
+import spinner from "../../../img/Spinner.gif";
 
 function Loading() {
   return <img src={spinner} alt="spinner"></img>;

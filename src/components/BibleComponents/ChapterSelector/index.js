@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 
-import CurrentBook from "../../context/CurrentBook";
-import Books from "../../context/Books";
+import CurrentBook from "../../../context/CurrentBook";
+import Books from "../../../context/Books";
 
-import Loading from "../Loading/index";
+import Loading from "../../GeneralComponents/Loading/index";
 
 function ChapterSelector({ showSelector }) {
   const { currentBook, setCurrentBook } = useContext(CurrentBook);

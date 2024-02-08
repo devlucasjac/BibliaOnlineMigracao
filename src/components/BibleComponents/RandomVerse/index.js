@@ -1,12 +1,12 @@
 import ShowVerse from "../ShowVerse/index";
-import Loading from "../Loading/index";
+import Loading from "../../GeneralComponents/Loading/index";
 
 import { useEffect, useState, useContext } from "react";
 
-import { BASE_URL } from "../../configs";
+import { BASE_URL } from "../../../configs";
 
-import CurrentBook from "../../context/CurrentBook";
-import Books from "../../context/Books";
+import CurrentBook from "../../../context/CurrentBook";
+import Books from "../../../context/Books";
 
 function RandomVerse() {
   const [verse, setVerse] = useState();

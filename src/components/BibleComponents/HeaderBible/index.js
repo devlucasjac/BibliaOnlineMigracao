@@ -22,19 +22,17 @@ function HeaderBible() {
       >
         <>
           <button onClick={() => setShowBibleSelection(false)}>Fechar</button>
-          <p>Bibla</p>
+
           <BibleSelector showSelector={setShowBibleSelection} />
         </>
       </Modal>
       <button onClick={() => setShowBookSelection(true)}>Livro</button>
-
       <Modal
         open={showBookSelection}
         handleClose={() => setShowBookSelection(false)}
       >
         <>
           <button onClick={() => setShowBookSelection(false)}>Fechar</button>
-          <p>Livro</p>
           <BookSelector showSelector={setShowBookSelection} />
         </>
       </Modal>
