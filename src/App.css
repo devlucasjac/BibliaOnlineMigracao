@@ -16,6 +16,7 @@
 
 body {
   background-color: var(--gray-50);
+  padding: 10%;
 }
 
 body,
@@ -23,7 +24,7 @@ input,
 textarea,
 button {
   font: 500 1rem Inter, sans-serif;
-  color: var(--gray-500);
+  color: var(--gray-800);
 }
 
 button {

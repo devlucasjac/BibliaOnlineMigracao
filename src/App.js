@@ -2,6 +2,8 @@ import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 
 import Bible from "./pages/Bible/index";
 
+import styles from "./App.css";
+
 function App() {
   return (
     <Router>

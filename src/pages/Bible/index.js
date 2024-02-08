@@ -1,6 +1,7 @@
 import BibleReader from "../../components/BibleComponents/BibleReader/index";
 import Loading from "../../components/GeneralComponents/Loading/index";
 import RandomVerse from "../../components/BibleComponents/RandomVerse/index";
+import NavBar from "../../components/GeneralComponents/NavBar";
 
 import CurrentBook from "../../context/CurrentBook";
 import Books from "../../context/Books";
@@ -45,6 +46,7 @@ function Bible() {
     <div>
       <CurrentBook.Provider value={{ currentBook, setCurrentBook }}>
         <Books.Provider value={{ books, setBooks }}>
+          <NavBar />
           {books ? (
             <>
               <RandomVerse />
