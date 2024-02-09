@@ -6,6 +6,10 @@ import BibleSelector from "../BibleSelector/index";
 import BookSelector from "../BookSelector/index";
 import ChapterSelector from "../ChapterSelector";
 
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import SettingsIcon from "@mui/icons-material/Settings";
+
 function HeaderBible() {
   const [showBibleSelection, setShowBibleSelection] = useState(false);
   const [showBookSelection, setShowBookSelection] = useState(false);
@@ -13,42 +17,64 @@ function HeaderBible() {
 
   return (
     <>
-      <button>configurações</button>
-      <div>
-        <button onClick={() => setShowBibleSelection(true)}>Bíblia</button>
+      <Button>
+        <SettingsIcon></SettingsIcon>
+      </Button>
+      <Stack spacing={1} direction="row">
+        <Button
+          onClick={() => setShowBibleSelection(true)}
+          size="large"
+          variant="outlined"
+        >
+          Bíblia
+        </Button>
         <Modal
           open={showBibleSelection}
           handleClose={() => setShowBibleSelection(false)}
+          size="large"
+          variant="outlined"
         >
           <>
-            <button onClick={() => setShowBibleSelection(false)}>Fechar</button>
+            <Button onClick={() => setShowBibleSelection(false)}>Fechar</Button>
 
             <BibleSelector showSelector={setShowBibleSelection} />
           </>
         </Modal>
-        <button onClick={() => setShowBookSelection(true)}>Livro</button>
+        <Button
+          onClick={() => setShowBookSelection(true)}
+          size="large"
+          variant="outlined"
+        >
+          Livro
+        </Button>
         <Modal
           open={showBookSelection}
           handleClose={() => setShowBookSelection(false)}
         >
           <>
-            <button onClick={() => setShowBookSelection(false)}>Fechar</button>
+            <Button onClick={() => setShowBookSelection(false)}>Fechar</Button>
             <BookSelector showSelector={setShowBookSelection} />
           </>
         </Modal>
-        <button onClick={() => setShowChapterSelection(true)}>Capitulo</button>
+        <Button
+          onClick={() => setShowChapterSelection(true)}
+          size="large"
+          variant="outlined"
+        >
+          Capitulo
+        </Button>
         <Modal
           open={showChapterSelection}
           handleClose={() => setShowChapterSelection(false)}
         >
           <>
-            <button onClick={() => setShowChapterSelection(false)}>
+            <Button onClick={() => setShowChapterSelection(false)}>
               Fechar
-            </button>
+            </Button>
             <ChapterSelector showSelector={setShowChapterSelection} />
           </>
         </Modal>
-      </div>
+      </Stack>
     </>
   );
 }
