@@ -12,7 +12,6 @@ function ChapterSelector({ showSelector }) {
   const [chapters, setChapters] = useState();
 
   useEffect(() => {
-    console.log(books, currentBook.book);
     const book = books.find((book) => book.bookid == currentBook.book);
     let rows = [];
     for (let i = 1; i <= book.chapters; i++) {

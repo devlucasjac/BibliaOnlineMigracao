@@ -1,9 +1,25 @@
+import Typography from "@mui/material/Typography";
+
 function ShowVerse({ verse }) {
   return (
-    <div>
-      <span>{verse.verse}</span>
-      <p>{verse.text}</p>
-    </div>
+    <>
+      <Typography variant="span">
+        <Typography
+          variant="span"
+          style={{
+            paddingBottom: "1.6em",
+            paddingTop: "1em",
+            fontSize: "0.68em",
+            color: "blue",
+            verticalAlign: "super",
+            whiteSpace: "pre",
+          }}
+        >
+          {verse.verse}
+        </Typography>
+        {verse.text}
+      </Typography>
+    </>
   );
 }
 

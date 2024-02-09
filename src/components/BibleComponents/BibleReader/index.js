@@ -7,6 +7,11 @@ import Books from "../../../context/Books";
 import Loading from "../../GeneralComponents/Loading/index";
 import ShowVerse from "../ShowVerse/index";
 import HeaderBible from "../HeaderBible/index";
+import Bookmark from "../Bookmark/index";
+
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
 function BibleReader() {
   const { currentBook, setCurrentBook } = useContext(CurrentBook);
@@ -25,6 +30,7 @@ function BibleReader() {
   const book = findBook(currentBook.book);
 
   useEffect(() => {
+    console.log("abriu biblia");
     const xhr = new XMLHttpRequest();
     xhr.open(
       "GET",
@@ -82,47 +88,56 @@ function BibleReader() {
   return (
     <>
       {chapter && book ? (
-        <div>
-          <HeaderBible />
-          <h2>
-            {book.name}: {currentBook.chapterNum}
-          </h2>
-          <button
-            onClick={() => {
-              window.localStorage.setItem("Bible", currentBook.bible);
-              window.localStorage.setItem("Book", currentBook.book);
-              window.localStorage.setItem("ChapterNum", currentBook.chapterNum);
+        <Card sx={{ maxWidth: "80%", margin: "0 auto" }}>
+          <CardContent
+            sx={{
+              backgroundColor: "black",
+              display: "flex",
+              justifyContent: "space-between",
             }}
           >
-            Marcar Pagina
-          </button>
-          <article>
-            {chapter.map((verse) => (
-              <ShowVerse verse={verse} key={verse.id} />
-            ))}
-          </article>
-          <button
-            value="anterior"
-            onClick={changeChapter}
-            disabled={
-              currentBook.book === 1 && currentBook.chapterNum === 1 && true
-            }
-          >
-            Anterior
-          </button>
+            <HeaderBible />
+          </CardContent>
+          <CardContent sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Bookmark />
+          </CardContent>
+          <CardContent>
+            <h2 style={{ marginBottom: "15px" }}>
+              {book.name}: {currentBook.chapterNum}
+            </h2>
+            <article>
+              {chapter.map((verse) => (
+                <ShowVerse verse={verse} key={verse.id} />
+              ))}
+            </article>
+          </CardContent>
 
-          <button
-            value="proximo"
-            onClick={changeChapter}
-            disabled={
-              currentBook.book === books[books.length - 1].bookid &&
-              currentBook.chapterNum === book.chapters &&
-              true
-            }
+          <CardContent
+            sx={{ display: "flex", justifyContent: "space-between" }}
           >
-            Proximo
-          </button>
-        </div>
+            <button
+              value="anterior"
+              onClick={changeChapter}
+              disabled={
+                currentBook.book === 1 && currentBook.chapterNum === 1 && true
+              }
+            >
+              Anterior
+            </button>
+
+            <button
+              value="proximo"
+              onClick={changeChapter}
+              disabled={
+                currentBook.book === books[books.length - 1].bookid &&
+                currentBook.chapterNum === book.chapters &&
+                true
+              }
+            >
+              Proximo
+            </button>
+          </CardContent>
+        </Card>
       ) : (
         <Loading />
       )}

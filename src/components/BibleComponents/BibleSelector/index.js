@@ -28,6 +28,7 @@ function BibleSelector({ showSelector }) {
       ...currentBook,
       bible: e.target.value,
       book: 1,
+      chapterNum: 1,
     });
 
     showSelector(false);

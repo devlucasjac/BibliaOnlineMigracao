@@ -16,19 +16,20 @@ function Bible() {
   const savedChapter = parseInt(window.localStorage.getItem("ChapterNum"));
 
   const [books, setBooks] = useState();
+
   const [currentBook, setCurrentBook] = useState(() => {
-    if (window.localStorage.getItem("Bible") !== null) {
+    if (savedBible !== null) {
       return {
         bible: savedBible,
         book: savedBook,
         chapterNum: savedChapter,
       };
-    } else {
-      return { bible: "ARA", book: 1, chapterNum: 1 };
     }
+    return { bible: "ARA", book: 1, chapterNum: 1 };
   });
 
   useEffect(() => {
+    console.log("abriu pagina");
     const request = new XMLHttpRequest();
     request.open("GET", BASE_URL + "get-books/" + currentBook.bible + "/");
     request.send();
