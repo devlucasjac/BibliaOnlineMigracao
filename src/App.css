@@ -1,6 +1,7 @@
 :root {
   /*Aqui são inseridas as variaveis 
   globais do CSS*/
+  --red-500: #b1160a;
 
   --gray-50: #f7f8fa;
   --gray-100: #e6e8eb;
@@ -16,7 +17,8 @@
 
 body {
   background-color: var(--gray-50);
-  padding: 5%;
+  padding-top: 5%;
+  padding-bottom: 3%;
 }
 
 body,

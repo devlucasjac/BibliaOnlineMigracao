@@ -23,7 +23,7 @@ function HeaderBible() {
       <Stack spacing={1} direction="row">
         <Button
           onClick={() => setShowBibleSelection(true)}
-          size="large"
+          size="small"
           variant="outlined"
         >
           Bíblia
@@ -31,7 +31,7 @@ function HeaderBible() {
         <Modal
           open={showBibleSelection}
           handleClose={() => setShowBibleSelection(false)}
-          size="large"
+          size="small"
           variant="outlined"
         >
           <>
@@ -42,7 +42,7 @@ function HeaderBible() {
         </Modal>
         <Button
           onClick={() => setShowBookSelection(true)}
-          size="large"
+          size="small"
           variant="outlined"
         >
           Livro
@@ -58,7 +58,7 @@ function HeaderBible() {
         </Modal>
         <Button
           onClick={() => setShowChapterSelection(true)}
-          size="large"
+          size="small"
           variant="outlined"
         >
           Capitulo

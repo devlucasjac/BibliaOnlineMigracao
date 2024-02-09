@@ -11,7 +11,10 @@ import Bookmark from "../Bookmark/index";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import { SlArrowRight } from "react-icons/sl";
+import { SlArrowLeft } from "react-icons/sl";
+
+import Button from "@mui/material/Button";
 
 function BibleReader() {
   const { currentBook, setCurrentBook } = useContext(CurrentBook);
@@ -98,14 +101,20 @@ function BibleReader() {
           >
             <HeaderBible />
           </CardContent>
-          <CardContent sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <CardContent
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              paddingTop: 0,
+            }}
+          >
             <Bookmark />
           </CardContent>
           <CardContent>
             <h2 style={{ marginBottom: "15px" }}>
               {book.name}: {currentBook.chapterNum}
             </h2>
-            <article>
+            <article style={{ padding: "20px" }}>
               {chapter.map((verse) => (
                 <ShowVerse verse={verse} key={verse.id} />
               ))}
@@ -115,7 +124,7 @@ function BibleReader() {
           <CardContent
             sx={{ display: "flex", justifyContent: "space-between" }}
           >
-            <button
+            <Button
               value="anterior"
               onClick={changeChapter}
               disabled={
@@ -123,9 +132,9 @@ function BibleReader() {
               }
             >
               Anterior
-            </button>
+            </Button>
 
-            <button
+            <Button
               value="proximo"
               onClick={changeChapter}
               disabled={
@@ -133,9 +142,10 @@ function BibleReader() {
                 currentBook.chapterNum === book.chapters &&
                 true
               }
+              sx={{ padding: 0 }}
             >
               Proximo
-            </button>
+            </Button>
           </CardContent>
         </Card>
       ) : (

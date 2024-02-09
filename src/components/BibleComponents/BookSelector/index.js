@@ -29,6 +29,7 @@ function BookSelector({ showSelector }) {
     setCurrentBook({
       ...currentBook,
       book: e.target.value,
+      chapterNum: 1,
     });
     showSelector(false);
   }
