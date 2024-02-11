@@ -3,7 +3,14 @@ import CurrentBook from "../../../context/CurrentBook";
 
 import Loading from "../../GeneralComponents/Loading/index";
 
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CloseIcon from "@mui/icons-material/Close";
+import Button from "@mui/material/Button";
+
 import { BASE_URL } from "../../../configs";
+import { ButtonGroup } from "@mui/material";
 
 function BibleSelector({ showSelector }) {
   const { currentBook, setCurrentBook } = useContext(CurrentBook);
@@ -35,17 +42,43 @@ function BibleSelector({ showSelector }) {
   }
 
   return (
-    <>
+    <Card
+      sx={{
+        maxWidth: "95%",
+        margin: "auto",
+        marginTop: "5px",
+        padding: "10px",
+      }}
+    >
+      <CardContent sx={{ padding: 0 }}>
+        <CloseIcon onClick={() => showSelector(false)} />
+      </CardContent>
       {bibles ? (
         <>
           {bibles.map((bible) => {
             return (
               <>
-                <span style={{ color: "white" }}>{bible.language}</span>;
+                <Typography
+                  variant="h6"
+                  sx={{ display: "inline-block", fontSize: "medium" }}
+                >
+                  {bible.language}
+                </Typography>
+
                 {bible.translations.map((translation) => (
-                  <button onClick={changeBible} value={translation.short_name}>
+                  <Button
+                    size="small"
+                    sx={{
+                      display: "inline-block",
+                      fontSize: "small",
+                      fontWeigth: "lighter",
+                      padding: 0,
+                    }}
+                    onClick={changeBible}
+                    value={translation.short_name}
+                  >
                     {translation.full_name}
-                  </button>
+                  </Button>
                 ))}
               </>
             );
@@ -54,7 +87,7 @@ function BibleSelector({ showSelector }) {
       ) : (
         <Loading />
       )}
-    </>
+    </Card>
   );
 }
 

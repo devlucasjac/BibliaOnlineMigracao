@@ -35,8 +35,6 @@ function HeaderBible() {
           variant="outlined"
         >
           <>
-            <Button onClick={() => setShowBibleSelection(false)}>Fechar</Button>
-
             <BibleSelector showSelector={setShowBibleSelection} />
           </>
         </Modal>
