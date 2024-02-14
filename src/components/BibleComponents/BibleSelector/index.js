@@ -8,9 +8,11 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
-import { BASE_URL } from "../../../configs";
-import { ButtonGroup } from "@mui/material";
+import { CardConteiner, StyledContent } from "./style";
+
+import { BASE_URL, Flags } from "../../../configs";
 
 function BibleSelector({ showSelector }) {
   const { currentBook, setCurrentBook } = useContext(CurrentBook);
@@ -23,6 +25,7 @@ function BibleSelector({ showSelector }) {
     xhr.onload = () => {
       if (xhr.readyState === 4 && xhr.status === 200) {
         const data = xhr.response;
+        console.log(JSON.parse(data)[0]);
         setBibles(JSON.parse(data));
       } else {
         console.log(`Error: ${xhr.status}`);
@@ -37,57 +40,65 @@ function BibleSelector({ showSelector }) {
       book: 1,
       chapterNum: 1,
     });
+    for (let i = 0; i < Flags.length; i++) {
+      console.log(Flags[i]);
+    }
 
     showSelector(false);
   }
 
   return (
-    <Card
-      sx={{
-        maxWidth: "95%",
-        margin: "auto",
-        marginTop: "5px",
-        padding: "10px",
-      }}
-    >
-      <CardContent sx={{ padding: 0 }}>
-        <CloseIcon onClick={() => showSelector(false)} />
-      </CardContent>
+    <CardConteiner>
+      <CloseIcon
+        sx={{ width: "20px", heigth: "20px", color: `var(--gray-500)` }}
+        onClick={() => showSelector(false)}
+      />
+
       {bibles ? (
-        <>
-          {bibles.map((bible) => {
+        <StyledContent>
+          {bibles.map((bible, i) => {
             return (
-              <>
+              <CardContent sx={{ padding: 0, margin: "5px" }}>
                 <Typography
                   variant="h6"
-                  sx={{ display: "inline-block", fontSize: "medium" }}
+                  sx={{
+                    display: "inline-block",
+                    fontSize: "medium",
+                    maxWidth: "800px",
+                  }}
                 >
-                  {bible.language}
+                  {Flags[i]}
                 </Typography>
-
-                {bible.translations.map((translation) => (
-                  <Button
-                    size="small"
-                    sx={{
-                      display: "inline-block",
-                      fontSize: "small",
-                      fontWeigth: "lighter",
-                      padding: 0,
-                    }}
-                    onClick={changeBible}
-                    value={translation.short_name}
-                  >
-                    {translation.full_name}
-                  </Button>
-                ))}
-              </>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  {bible.translations.map((translation) => (
+                    <Button
+                      size="small"
+                      sx={{
+                        padding: 0,
+                        maxWidth: "300px",
+                        margin: "5px",
+                      }}
+                      onClick={changeBible}
+                      value={translation.short_name}
+                    >
+                      {translation.full_name}
+                    </Button>
+                  ))}
+                </div>
+              </CardContent>
             );
           })}
-        </>
+        </StyledContent>
       ) : (
         <Loading />
       )}
-    </Card>
+    </CardConteiner>
   );
 }
 

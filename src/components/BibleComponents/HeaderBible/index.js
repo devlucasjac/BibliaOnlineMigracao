@@ -33,6 +33,7 @@ function HeaderBible() {
           handleClose={() => setShowBibleSelection(false)}
           size="small"
           variant="outlined"
+          sx={{ display: "block", overflowY: "initial" }}
         >
           <>
             <BibleSelector showSelector={setShowBibleSelection} />
