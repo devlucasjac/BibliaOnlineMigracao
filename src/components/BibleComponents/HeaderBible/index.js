@@ -50,10 +50,7 @@ function HeaderBible() {
           open={showBookSelection}
           handleClose={() => setShowBookSelection(false)}
         >
-          <>
-            <Button onClick={() => setShowBookSelection(false)}>Fechar</Button>
-            <BookSelector showSelector={setShowBookSelection} />
-          </>
+          <BookSelector showSelector={setShowBookSelection} />
         </Modal>
         <Button
           onClick={() => setShowChapterSelection(true)}

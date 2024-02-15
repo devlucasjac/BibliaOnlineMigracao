@@ -4,13 +4,11 @@ import CurrentBook from "../../../context/CurrentBook";
 import Loading from "../../GeneralComponents/Loading/index";
 
 import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CloseIcon from "@mui/icons-material/Close";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
 
-import { CardConteiner, StyledContent } from "./style";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+
+import { CardConteiner, StyledContent, StyledClose } from "./style";
 
 import { BASE_URL, Flags } from "../../../configs";
 
@@ -49,7 +47,7 @@ function BibleSelector({ showSelector }) {
 
   return (
     <CardConteiner>
-      <CloseIcon
+      <StyledClose
         sx={{ width: "20px", heigth: "20px", color: `var(--gray-500)` }}
         onClick={() => showSelector(false)}
       />
@@ -87,7 +85,7 @@ function BibleSelector({ showSelector }) {
                       onClick={changeBible}
                       value={translation.short_name}
                     >
-                      {translation.full_name}
+                      * {translation.full_name}
                     </Button>
                   ))}
                 </div>

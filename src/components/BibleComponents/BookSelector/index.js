@@ -2,7 +2,13 @@ import { useState, useEffect, useContext } from "react";
 
 import CurrentBook from "../../../context/CurrentBook";
 
+import CardContent from "@mui/material/CardContent";
+import Card from "@mui/material/Card";
+import Button from "@mui/material/Button";
+
 import Loading from "../../GeneralComponents/Loading/index";
+
+import { StyledClose } from "../BibleSelector/style";
 
 import { BASE_URL } from "../../../configs";
 
@@ -35,19 +41,37 @@ function BookSelector({ showSelector }) {
   }
 
   return (
-    <>
+    <Card
+      sx={{
+        maxWidth: "60vw",
+        margin: "50px auto",
+        overflowY: "auto",
+        maxHeight: "80vh",
+        padding: "10px",
+      }}
+    >
+      <StyledClose onClick={() => showSelector(false)} />
       {books ? (
-        <>
+        <CardContent>
           {books.map((book) => (
-            <button onClick={handleClose} value={book.bookid}>
-              {book.name}
-            </button>
+            <Button
+              size="small"
+              sx={{
+                padding: 0,
+                maxWidth: "400px",
+                margin: "5px",
+              }}
+              onClick={handleClose}
+              value={book.bookid}
+            >
+              * {book.name}
+            </Button>
           ))}
-        </>
+        </CardContent>
       ) : (
-        <Loading />
+        <></>
       )}
-    </>
+    </Card>
   );
 }
 
