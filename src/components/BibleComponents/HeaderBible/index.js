@@ -63,12 +63,7 @@ function HeaderBible() {
           open={showChapterSelection}
           handleClose={() => setShowChapterSelection(false)}
         >
-          <>
-            <Button onClick={() => setShowChapterSelection(false)}>
-              Fechar
-            </Button>
-            <ChapterSelector showSelector={setShowChapterSelection} />
-          </>
+          <ChapterSelector showSelector={setShowChapterSelection} />
         </Modal>
       </Stack>
     </>
