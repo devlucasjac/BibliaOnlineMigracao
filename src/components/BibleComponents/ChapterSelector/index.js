@@ -56,7 +56,7 @@ function ChapterSelector({ showSelector }) {
                   width: "60px",
                   height: "60px",
                   fontSize: "small",
-                  border: "1px var(--gray-100) solid",
+                  border: "2px var(--gray-100) solid",
                   margin: "5px",
                 }}
                 onClick={handleClick}
