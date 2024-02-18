@@ -1,4 +1,4 @@
-# React Bible App
+# BibliaOnline
 
 ## Descrição do Projeto
 
