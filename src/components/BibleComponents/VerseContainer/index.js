@@ -8,7 +8,7 @@ import { useContext } from "react";
 
 import Books from "../../../context/Books";
 
-function VerseContainer({ verse, title, handleClick }) {
+function VerseContainer({ verse, title, handleClick, isHtml }) {
   const { books } = useContext(Books);
 
   function findBook(bookid) {
@@ -19,16 +19,27 @@ function VerseContainer({ verse, title, handleClick }) {
   }
 
   return (
-    <Card sx={{ margin: "50px auto", maxWidth: "80%" }} onCLick={handleClick}>
-      <CardContent>
-        {title && <Typography variant="h5">{title}</Typography>}
-        <Typography variant="h6">Livro:{findBook(verse.book).name}</Typography>
-        <Typography variant="p" sx={{ display: "block", margin: "5px" }}>
-          Capitulo:{verse.chapter}
-        </Typography>
-        <ShowVerse verse={verse} />
-      </CardContent>
-    </Card>
+    <>
+      {verse.verse ? (
+        <Card
+          sx={{ margin: "50px auto", maxWidth: "80%" }}
+          onCLick={handleClick}
+        >
+          <CardContent>
+            {title && <Typography variant="h5">{title}</Typography>}
+            <Typography variant="h6">
+              Livro:{findBook(verse.book).name}
+            </Typography>
+            <Typography variant="p" sx={{ display: "block", margin: "5px" }}>
+              Capitulo:{verse.chapter}
+            </Typography>
+            <ShowVerse verse={verse} />
+          </CardContent>
+        </Card>
+      ) : (
+        <div>Verso não encontrado</div>
+      )}
+    </>
   );
 }
 

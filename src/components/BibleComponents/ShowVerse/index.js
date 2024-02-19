@@ -1,6 +1,6 @@
 import Typography from "@mui/material/Typography";
 
-function ShowVerse({ verse }) {
+function ShowVerse({ verse, isHtml }) {
   return (
     <>
       <Typography variant="span">
