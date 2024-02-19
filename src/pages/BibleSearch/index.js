@@ -1,19 +1,22 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 
-import CurrentBook from "../../context/CurrentBook";
 import BibleResults from "../../context/BibleResults";
 
-import ShowVerse from "../../components/BibleComponents/ShowVerse";
+import Loading from "../../components/GeneralComponents/Loading";
+import VerseContainer from "../../components/BibleComponents/VerseContainer";
 
 function BibleSearch() {
   const { results } = useContext(BibleResults);
 
   return (
     <div>
-      {results &&
+      {results ? (
         results.map((result) => {
-          return <ShowVerse verse={result} />;
-        })}
+          return <VerseContainer verse={result} />;
+        })
+      ) : (
+        <Loading></Loading>
+      )}
     </div>
   );
 }

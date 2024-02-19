@@ -1,13 +1,10 @@
 import SearchIcon from "@mui/icons-material/Search";
 
 import { useState, useContext } from "react";
-
 import { useNavigate } from "react-router";
 
 import CurrentBook from "../../../context/CurrentBook";
 import BibleResults from "../../../context/BibleResults";
-
-import ShowVerse from "../../BibleComponents/ShowVerse";
 
 import { Search, SearchIconWrapper, StyledInputBase } from "./styles";
 
@@ -33,11 +30,11 @@ function SearchBox() {
         const data = xhr.response;
         console.log(JSON.parse(data));
         setResults(JSON.parse(data));
-        navigate("pesquisa/");
       } else {
         console.log(`Error: ${xhr.status}`);
       }
     };
+    navigate("pesquisa/");
   }
 
   return (
