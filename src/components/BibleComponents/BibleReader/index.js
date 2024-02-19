@@ -11,9 +11,6 @@ import Bookmark from "../Bookmark/index";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { SlArrowRight } from "react-icons/sl";
-import { SlArrowLeft } from "react-icons/sl";
-
 import Button from "@mui/material/Button";
 
 function BibleReader() {

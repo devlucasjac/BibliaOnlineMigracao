@@ -8,25 +8,11 @@ import Books from "../../context/Books";
 
 import { BASE_URL } from "../../configs";
 
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 
 function Bible() {
-  const savedBible = window.localStorage.getItem("Bible");
-  const savedBook = parseInt(window.localStorage.getItem("Book"));
-  const savedChapter = parseInt(window.localStorage.getItem("ChapterNum"));
-
-  const [books, setBooks] = useState();
-
-  const [currentBook, setCurrentBook] = useState(() => {
-    if (savedBible !== null) {
-      return {
-        bible: savedBible,
-        book: savedBook,
-        chapterNum: savedChapter,
-      };
-    }
-    return { bible: "ARA", book: 1, chapterNum: 1 };
-  });
+  const { currentBook, setCurrentBook } = useContext(CurrentBook);
+  const { books, setBooks } = useContext(Books);
 
   useEffect(() => {
     console.log("abriu pagina");
@@ -47,7 +33,6 @@ function Bible() {
     <div>
       <CurrentBook.Provider value={{ currentBook, setCurrentBook }}>
         <Books.Provider value={{ books, setBooks }}>
-          <NavBar />
           {books ? (
             <>
               <RandomVerse />
