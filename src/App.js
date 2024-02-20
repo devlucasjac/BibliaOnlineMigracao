@@ -5,7 +5,7 @@ import BibleSearch from "./pages/BibleSearch/index";
 
 import NavBar from "./components/GeneralComponents/NavBar/index";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import CurrentBook from "./context/CurrentBook";
 import Books from "./context/Books";
@@ -30,6 +30,10 @@ function App() {
       };
     }
     return { bible: "ARA", book: 1, chapterNum: 1 };
+  });
+
+  useEffect(() => {
+    console.log("abriu");
   });
 
   return (

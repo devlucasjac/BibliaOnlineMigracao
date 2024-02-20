@@ -1,5 +1,7 @@
 import Typography from "@mui/material/Typography";
 
+import parse from "html-react-parser";
+
 function ShowVerse({ verse, isHtml }) {
   return (
     <>
@@ -17,7 +19,7 @@ function ShowVerse({ verse, isHtml }) {
         >
           {verse.verse}
         </Typography>
-        {verse.text}
+        {parse(verse.text)}
       </Typography>
     </>
   );

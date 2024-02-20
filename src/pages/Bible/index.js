@@ -14,7 +14,6 @@ function Bible() {
   const { books, setBooks } = useContext(Books);
 
   useEffect(() => {
-    console.log("abriu pagina");
     const request = new XMLHttpRequest();
     request.open("GET", BASE_URL + "get-books/" + currentBook.bible + "/");
     request.send();
