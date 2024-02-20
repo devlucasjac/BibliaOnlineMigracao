@@ -7,6 +7,8 @@ import SearchBox from "../SearchBox/index";
 import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 
+import { useNavigate } from "react-router";
+
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -14,6 +16,8 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 
 function NavBar() {
+  const navigate = useNavigate();
+
   return (
     <Box>
       <AppBar>
@@ -32,6 +36,7 @@ function NavBar() {
             noWrap
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
+            onClick={() => navigate("/")}
           >
             Biblia Online
           </Typography>
