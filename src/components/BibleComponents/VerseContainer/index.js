@@ -8,7 +8,7 @@ import { useContext } from "react";
 
 import Books from "../../../context/Books";
 
-function VerseContainer({ verse, title, handleClick, isHtml }) {
+function VerseContainer({ verse, title, handleClick }) {
   const { books } = useContext(Books);
 
   function findBook(bookid) {
@@ -23,7 +23,7 @@ function VerseContainer({ verse, title, handleClick, isHtml }) {
       {verse.verse ? (
         <Card
           sx={{ margin: "50px auto", maxWidth: "80%" }}
-          onCLick={handleClick}
+          onClick={() => handleClick(verse)}
         >
           <CardContent>
             {title && <Typography variant="h5">{title}</Typography>}

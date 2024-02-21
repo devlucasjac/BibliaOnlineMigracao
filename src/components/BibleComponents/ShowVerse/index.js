@@ -4,7 +4,7 @@ import parse from "html-react-parser";
 
 import { StyledVerse } from "./style.js";
 
-function ShowVerse({ verse, isHtml }) {
+function ShowVerse({ verse }) {
   return (
     <div style={{ margin: "5px" }}>
       <StyledVerse variant="span">
