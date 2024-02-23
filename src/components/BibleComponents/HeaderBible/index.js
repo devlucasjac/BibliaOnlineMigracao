@@ -9,15 +9,70 @@ import ChapterSelector from "../ChapterSelector";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import SettingsIcon from "@mui/icons-material/Settings";
+import FormatSizeIcon from "@mui/icons-material/FormatSize";
+import FormatBoldIcon from "@mui/icons-material/FormatBold";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
 
 function HeaderBible() {
   const [showBibleSelection, setShowBibleSelection] = useState(false);
   const [showBookSelection, setShowBookSelection] = useState(false);
   const [showChapterSelection, setShowChapterSelection] = useState(false);
+  const [configAnchorEl, setConfigAnchorEl] = useState(null);
+
+  const isConfigOpen = Boolean(configAnchorEl);
+
+  function handleConfigMenuClose() {
+    setConfigAnchorEl(null);
+  }
+
+  function handleConfigMenuOpen(e) {
+    setConfigAnchorEl(e.currentTarget);
+  }
+
+  const renderConfigMenu = (
+    <Menu
+      anchorEl={configAnchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isConfigOpen}
+      onClose={handleConfigMenuClose}
+    >
+      <MenuItem>
+        <FormatSizeIcon
+          onClick={handleConfigMenuClose}
+          style={{ fontWeight: "lighter" }}
+          onMouseEnter={() => {
+            console.log("entrou");
+          }}
+        ></FormatSizeIcon>
+      </MenuItem>
+      <MenuItem>
+        <FormatBoldIcon
+          style={{ fontWeight: "bold" }}
+          onClick={handleConfigMenuClose}
+          onMouseEnter={() => {
+            console.log("entrou");
+          }}
+        ></FormatBoldIcon>
+      </MenuItem>
+    </Menu>
+  );
 
   return (
     <>
-      <Button>
+      <Button
+        onClick={(e) => {
+          handleConfigMenuOpen(e);
+        }}
+      >
         <SettingsIcon></SettingsIcon>
       </Button>
       <Stack spacing={1} direction="row">
@@ -66,6 +121,7 @@ function HeaderBible() {
           <ChapterSelector showSelector={setShowChapterSelection} />
         </Modal>
       </Stack>
+      {renderConfigMenu}
     </>
   );
 }
