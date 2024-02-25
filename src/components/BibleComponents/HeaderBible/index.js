@@ -14,10 +14,17 @@ import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+
 function HeaderBible() {
   const [showBibleSelection, setShowBibleSelection] = useState(false);
   const [showBookSelection, setShowBookSelection] = useState(false);
   const [showChapterSelection, setShowChapterSelection] = useState(false);
+
   const [configAnchorEl, setConfigAnchorEl] = useState(null);
 
   const isConfigOpen = Boolean(configAnchorEl);
@@ -46,22 +53,65 @@ function HeaderBible() {
       onClose={handleConfigMenuClose}
     >
       <MenuItem>
-        <FormatSizeIcon
-          onClick={handleConfigMenuClose}
-          style={{ fontWeight: "lighter" }}
-          onMouseEnter={() => {
-            console.log("entrou");
-          }}
-        ></FormatSizeIcon>
+        <FormControl>
+          <FormatSizeIcon
+            onClick={handleConfigMenuClose}
+            style={{ fontWeight: "lighter" }}
+            onMouseEnter={() => {
+              console.log("entrou");
+            }}
+          ></FormatSizeIcon>
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue="female"
+            name="radio-buttons-group"
+          >
+            <FormControlLabel
+              value="pequeno"
+              control={<Radio />}
+              label="pequeno"
+            />
+            <FormControlLabel
+              value="regular"
+              control={<Radio />}
+              label="regular"
+            />
+            <FormControlLabel
+              value="grande"
+              control={<Radio />}
+              label="grande"
+            />
+          </RadioGroup>
+        </FormControl>
       </MenuItem>
       <MenuItem>
-        <FormatBoldIcon
-          style={{ fontWeight: "bold" }}
-          onClick={handleConfigMenuClose}
-          onMouseEnter={() => {
-            console.log("entrou");
-          }}
-        ></FormatBoldIcon>
+        <FormControl>
+          <FormatBoldIcon
+            style={{ fontWeight: "bold" }}
+            onClick={handleConfigMenuClose}
+          ></FormatBoldIcon>
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue="female"
+            name="radio-buttons-group"
+          >
+            <FormControlLabel
+              value="delicado"
+              control={<Radio />}
+              label="delicado"
+            />
+            <FormControlLabel
+              value="regular"
+              control={<Radio />}
+              label="regular"
+            />
+            <FormControlLabel
+              value="negrito"
+              control={<Radio />}
+              label="negrito"
+            />
+          </RadioGroup>
+        </FormControl>
       </MenuItem>
     </Menu>
   );
