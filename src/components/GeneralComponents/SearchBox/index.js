@@ -1,23 +1,26 @@
 import SearchIcon from "@mui/icons-material/Search";
 
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router";
 
 import CurrentBook from "../../../context/CurrentBook";
-
-import ShowVerse from "../../BibleComponents/ShowVerse";
+import BibleResults from "../../../context/BibleResults";
 
 import { Search, SearchIconWrapper, StyledInputBase } from "./styles";
 
 import { BASE_URL } from "../../../configs";
 
 function SearchBox() {
+  const navigate = useNavigate();
   const { currentBook } = useContext(CurrentBook);
+  const { setResults } = useContext(BibleResults);
 
   const [input, setInput] = useState();
-  const [results, setResults] = useState();
 
   function searchPassages(e) {
     e.preventDefault();
+    setResults();
+    navigate("pesquisa/");
     const xhr = new XMLHttpRequest();
     xhr.open(
       "GET",
@@ -27,7 +30,6 @@ function SearchBox() {
     xhr.onload = () => {
       if (xhr.readyState === 4 && xhr.status === 200) {
         const data = xhr.response;
-        console.log(JSON.parse(data));
         setResults(JSON.parse(data));
       } else {
         console.log(`Error: ${xhr.status}`);
@@ -49,10 +51,6 @@ function SearchBox() {
           inputProps={{ "aria-label": "search" }}
         />
       </form>
-      {results &&
-        results.map((result) => {
-          return <ShowVerse verse={result} />;
-        })}
     </Search>
   );
 }

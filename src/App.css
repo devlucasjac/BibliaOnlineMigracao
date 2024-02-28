@@ -3,11 +3,14 @@
   globais do CSS*/
   --red-500: #b1160a;
 
+  --yellow-300: #fcff00;
+
   --gray-50: #f7f8fa;
   --gray-100: #e6e8eb;
   --gray-200: #afb2b1;
   --gray-500: #808080;
   --gray-800: #494d4b;
+  --gray-1000: #272b29;
 }
 * {
   margin: 0;
@@ -16,7 +19,7 @@
 }
 
 body {
-  background-color: var(--gray-50);
+  background-color: var(--gray-100);
   padding-top: 5%;
   padding-bottom: 3%;
 }

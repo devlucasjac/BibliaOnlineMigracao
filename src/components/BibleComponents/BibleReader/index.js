@@ -4,16 +4,12 @@ import { BASE_URL } from "../../../configs";
 import CurrentBook from "../../../context/CurrentBook";
 import Books from "../../../context/Books";
 
-import Loading from "../../GeneralComponents/Loading/index";
 import ShowVerse from "../ShowVerse/index";
 import HeaderBible from "../HeaderBible/index";
 import Bookmark from "../Bookmark/index";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { SlArrowRight } from "react-icons/sl";
-import { SlArrowLeft } from "react-icons/sl";
-
 import Button from "@mui/material/Button";
 
 function BibleReader() {
@@ -90,7 +86,7 @@ function BibleReader() {
 
   return (
     <>
-      {chapter && book ? (
+      {chapter && book && (
         <Card sx={{ maxWidth: "80%", margin: "0 auto" }}>
           <CardContent
             sx={{
@@ -148,8 +144,6 @@ function BibleReader() {
             </Button>
           </CardContent>
         </Card>
-      ) : (
-        <Loading />
       )}
     </>
   );

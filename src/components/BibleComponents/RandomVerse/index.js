@@ -1,4 +1,3 @@
-import ShowVerse from "../ShowVerse/index";
 import Loading from "../../GeneralComponents/Loading/index";
 
 import { useEffect, useState, useContext } from "react";
@@ -6,16 +5,12 @@ import { useEffect, useState, useContext } from "react";
 import { BASE_URL } from "../../../configs";
 
 import CurrentBook from "../../../context/CurrentBook";
-import Books from "../../../context/Books";
 
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import VerseContainer from "../VerseContainer";
 
 function RandomVerse() {
   const [verse, setVerse] = useState();
   const { currentBook } = useContext(CurrentBook);
-  const { books } = useContext(Books);
 
   useEffect(() => {
     console.log("abriu verso");
@@ -33,28 +28,10 @@ function RandomVerse() {
     };
   }, [currentBook.bible]);
 
-  function findBook(bookid) {
-    if (books.find((book) => book.bookid === bookid) === undefined) {
-      return "livro não encontrado 😢";
-    }
-    return books.find((book) => book.bookid === bookid);
-  }
-
   return (
     <section>
       {verse ? (
-        <Card sx={{ margin: "50px auto", maxWidth: "80%" }}>
-          <CardContent>
-            <Typography variant="h5">Palavra do dia</Typography>
-            <Typography variant="h6">
-              Livro:{findBook(verse.book).name}
-            </Typography>
-            <Typography variant="p" sx={{ display: "block", margin: "5px" }}>
-              Capitulo:{verse.chapter}
-            </Typography>
-            <ShowVerse verse={verse} />
-          </CardContent>
-        </Card>
+        <VerseContainer verse={verse} title="Palavra do dia" />
       ) : (
         <Loading />
       )}

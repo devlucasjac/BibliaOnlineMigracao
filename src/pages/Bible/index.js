@@ -1,35 +1,19 @@
 import BibleReader from "../../components/BibleComponents/BibleReader/index";
 import Loading from "../../components/GeneralComponents/Loading/index";
 import RandomVerse from "../../components/BibleComponents/RandomVerse/index";
-import NavBar from "../../components/GeneralComponents/NavBar";
 
 import CurrentBook from "../../context/CurrentBook";
 import Books from "../../context/Books";
 
 import { BASE_URL } from "../../configs";
 
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 
 function Bible() {
-  const savedBible = window.localStorage.getItem("Bible");
-  const savedBook = parseInt(window.localStorage.getItem("Book"));
-  const savedChapter = parseInt(window.localStorage.getItem("ChapterNum"));
-
-  const [books, setBooks] = useState();
-
-  const [currentBook, setCurrentBook] = useState(() => {
-    if (savedBible !== null) {
-      return {
-        bible: savedBible,
-        book: savedBook,
-        chapterNum: savedChapter,
-      };
-    }
-    return { bible: "ARA", book: 1, chapterNum: 1 };
-  });
+  const { currentBook, setCurrentBook } = useContext(CurrentBook);
+  const { books, setBooks } = useContext(Books);
 
   useEffect(() => {
-    console.log("abriu pagina");
     const request = new XMLHttpRequest();
     request.open("GET", BASE_URL + "get-books/" + currentBook.bible + "/");
     request.send();
@@ -47,7 +31,6 @@ function Bible() {
     <div>
       <CurrentBook.Provider value={{ currentBook, setCurrentBook }}>
         <Books.Provider value={{ books, setBooks }}>
-          <NavBar />
           {books ? (
             <>
               <RandomVerse />
