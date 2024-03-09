@@ -21,6 +21,9 @@ O BibliaOnline é uma aplicação web desenvolvida utilizando a biblioteca React
 4. **Personalização:**
    - Escolha entre diferentes traduções da Bíblia para atender às preferências pessoais.
    - Ajuste o tema da aplicação para melhorar a legibilidade.
+  
+5. **Versiculos Diarios:**
+   -Receba todos dias uma palavra de inspiração retirada diretamente da bíblia.   
 
 ## Tecnologias Utilizadas
 
