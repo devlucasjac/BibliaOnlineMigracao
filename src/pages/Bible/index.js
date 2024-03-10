@@ -29,18 +29,14 @@ function Bible() {
 
   return (
     <div>
-      <CurrentBook.Provider value={{ currentBook, setCurrentBook }}>
-        <Books.Provider value={{ books, setBooks }}>
-          {books ? (
-            <>
-              <RandomVerse />
-              <BibleReader />
-            </>
-          ) : (
-            <Loading />
-          )}
-        </Books.Provider>
-      </CurrentBook.Provider>
+      {books ? (
+        <>
+          <RandomVerse />
+          <BibleReader />
+        </>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }

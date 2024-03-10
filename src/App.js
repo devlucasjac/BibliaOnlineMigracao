@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import CurrentBook from "./context/CurrentBook";
 import Books from "./context/Books";
 import BibleResults from "./context/BibleResults";
+import FontStyle from "./context/FontStyle";
 
 import "./App.css";
 
@@ -20,6 +21,7 @@ function App() {
 
   const [books, setBooks] = useState();
   const [results, setResults] = useState();
+  const [font, setFont] = useState({ size: "", bold: "" });
 
   const [currentBook, setCurrentBook] = useState(() => {
     if (savedBible !== null) {
@@ -41,13 +43,15 @@ function App() {
       <CurrentBook.Provider value={{ currentBook, setCurrentBook }}>
         <Books.Provider value={{ books, setBooks }}>
           <BibleResults.Provider value={{ results, setResults }}>
-            <Router>
-              <NavBar />
-              <Routes>
-                <Route exact path="/" element={<Bible />} />
-                <Route exact path="/pesquisa" element={<BibleSearch />} />
-              </Routes>
-            </Router>
+            <FontStyle.Provider value={{ font, setFont }}>
+              <Router>
+                <NavBar />
+                <Routes>
+                  <Route exact path="/" element={<Bible />} />
+                  <Route exact path="/pesquisa" element={<BibleSearch />} />
+                </Routes>
+              </Router>
+            </FontStyle.Provider>
           </BibleResults.Provider>
         </Books.Provider>
       </CurrentBook.Provider>

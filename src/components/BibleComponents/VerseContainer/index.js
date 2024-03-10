@@ -10,7 +10,6 @@ import Books from "../../../context/Books";
 
 function VerseContainer({ verse, title, handleClick }) {
   const { books } = useContext(Books);
-
   function findBook(bookid) {
     if (books.find((book) => book.bookid === bookid) === undefined) {
       return "livro não encontrado 😢";
@@ -23,7 +22,9 @@ function VerseContainer({ verse, title, handleClick }) {
       {verse.verse ? (
         <Card
           sx={{ margin: "50px auto", maxWidth: "80%" }}
-          onClick={() => handleClick(verse)}
+          onClick={() => {
+            handleClick !== undefined ? handleClick(verse) : console.log("oi");
+          }}
         >
           <CardContent>
             {title && <Typography variant="h5">{title}</Typography>}
