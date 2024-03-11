@@ -23,7 +23,7 @@ function VerseContainer({ verse, title, handleClick }) {
         <Card
           sx={{ margin: "50px auto", maxWidth: "80%" }}
           onClick={() => {
-            handleClick !== undefined ? handleClick(verse) : console.log("oi");
+            handleClick !== undefined && handleClick(verse);
           }}
         >
           <CardContent>

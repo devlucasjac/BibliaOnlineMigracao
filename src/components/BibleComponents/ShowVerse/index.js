@@ -1,13 +1,19 @@
 import Typography from "@mui/material/Typography";
 
+import { useContext } from "react";
+
 import parse from "html-react-parser";
 
 import { StyledVerse } from "./style.js";
 
+import FontStyle from "../../../context/FontStyle";
+
 function ShowVerse({ verse }) {
+  const { fontStyle } = useContext(FontStyle);
+
   return (
     <div style={{ margin: "5px" }}>
-      <StyledVerse variant="span">
+      <StyledVerse variant="span" bold="bold" size="large">
         <Typography
           variant="span"
           style={{
