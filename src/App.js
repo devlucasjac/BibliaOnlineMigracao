@@ -15,13 +15,28 @@ import FontStyle from "./context/FontStyle";
 import "./App.css";
 
 function App() {
+  function getObjectFromCookie() {
+    var cookieValue = document.cookie.replace(
+      /(?:(?:^|.*;\s*)fontConfig\s*\=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    return cookieValue ? JSON.parse(cookieValue) : null;
+  }
+
   const savedBible = window.localStorage.getItem("Bible");
   const savedBook = parseInt(window.localStorage.getItem("Book"));
   const savedChapter = parseInt(window.localStorage.getItem("ChapterNum"));
 
+  const fontStyle = getObjectFromCookie();
+
   const [books, setBooks] = useState();
   const [results, setResults] = useState();
-  const [font, setFont] = useState({ size: "", bold: "" });
+  const [font, setFont] = useState(() => {
+    if (fontStyle !== null) {
+      return fontStyle;
+    }
+    return { size: "large", bold: "bold" };
+  });
 
   const [currentBook, setCurrentBook] = useState(() => {
     if (savedBible !== null) {

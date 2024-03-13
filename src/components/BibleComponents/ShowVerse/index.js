@@ -9,11 +9,11 @@ import { StyledVerse } from "./style.js";
 import FontStyle from "../../../context/FontStyle";
 
 function ShowVerse({ verse }) {
-  const { fontStyle } = useContext(FontStyle);
+  const { font } = useContext(FontStyle);
 
   return (
     <div style={{ margin: "5px" }}>
-      <StyledVerse variant="span" bold="bold" size="large">
+      <StyledVerse variant="span" bold={font.bold} size={font.size}>
         <Typography
           variant="span"
           style={{

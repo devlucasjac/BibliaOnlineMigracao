@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import Modal from "@mui/material/Modal";
 
@@ -18,16 +18,28 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
+
+import FontStyle from "../../../context/FontStyle";
 
 function HeaderBible() {
   const [showBibleSelection, setShowBibleSelection] = useState(false);
   const [showBookSelection, setShowBookSelection] = useState(false);
   const [showChapterSelection, setShowChapterSelection] = useState(false);
-
   const [configAnchorEl, setConfigAnchorEl] = useState(null);
 
   const isConfigOpen = Boolean(configAnchorEl);
+
+  const { font, setFont } = useContext(FontStyle);
+
+  function saveObjectToCookie(obj) {
+    var jsonStr = JSON.stringify(obj);
+    console.log(jsonStr);
+
+    document.cookie =
+      "fontConfig=" +
+      jsonStr +
+      "; expires=Thu, 18 Dec 2024 12:00:00 UTC; path=/";
+  }
 
   function handleConfigMenuClose() {
     setConfigAnchorEl(null);
@@ -65,22 +77,22 @@ function HeaderBible() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="female"
             name="radio-buttons-group"
+            onClick={(e) => {
+              setFont({ ...font, size: e.target.value });
+              saveObjectToCookie(font);
+            }}
           >
             <FormControlLabel
-              value="pequeno"
+              value="small"
               control={<Radio />}
               label="pequeno"
             />
             <FormControlLabel
-              value="regular"
+              value="medium"
               control={<Radio />}
               label="regular"
             />
-            <FormControlLabel
-              value="grande"
-              control={<Radio />}
-              label="grande"
-            />
+            <FormControlLabel value="big" control={<Radio />} label="grande" />
           </RadioGroup>
         </FormControl>
       </MenuItem>
@@ -94,19 +106,23 @@ function HeaderBible() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="female"
             name="radio-buttons-group"
+            onClick={(e) => {
+              setFont({ ...font, bold: e.target.value });
+              saveObjectToCookie(font);
+            }}
           >
             <FormControlLabel
-              value="delicado"
+              value="ligth"
               control={<Radio />}
               label="delicado"
             />
             <FormControlLabel
-              value="regular"
+              value="medium"
               control={<Radio />}
               label="regular"
             />
             <FormControlLabel
-              value="negrito"
+              value="bold"
               control={<Radio />}
               label="negrito"
             />
