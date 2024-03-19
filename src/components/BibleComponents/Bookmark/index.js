@@ -9,9 +9,8 @@ import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 
 function Bookmark() {
   const { currentBook } = useContext(CurrentBook);
-  const [savedBible, setSavedBible] = useState(
-    window.localStorage.getItem("Bible")
-  );
+  const localBible = window.localStorage.getItem("Bible");
+  const [savedBible, setSavedBible] = useState(localBible);
 
   return (
     <StyledMark
@@ -23,7 +22,11 @@ function Bookmark() {
         window.localStorage.setItem("ChapterNum", currentBook.chapterNum);
       }}
     >
-      {savedBible !== null ? <BookmarkAddedIcon /> : <BookmarkAddIcon />}
+      {currentBook.bible === savedBible ? (
+        <BookmarkAddedIcon />
+      ) : (
+        <BookmarkAddIcon />
+      )}
     </StyledMark>
   );
 }
