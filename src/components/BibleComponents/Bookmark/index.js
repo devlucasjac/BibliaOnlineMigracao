@@ -12,15 +12,11 @@ function Bookmark() {
   const localChapter = window.localStorage.getItem("ChapterNum");
   const [savedBible, setSavedBible] = useState(localChapter);
 
-  useEffect(() => {
-    console.log(savedBible);
-  });
-
   return (
     <StyledMark
       style={{ style: "unset" }}
       onClick={() => {
-        setSavedBible(currentBook.bible);
+        setSavedBible(currentBook.chapterNum);
         window.localStorage.setItem("Bible", currentBook.bible);
         window.localStorage.setItem("Book", currentBook.book);
         window.localStorage.setItem("ChapterNum", currentBook.chapterNum);
