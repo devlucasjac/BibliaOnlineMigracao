@@ -11,6 +11,8 @@ import { useNavigate } from "react-router";
 
 import { useState } from "react";
 
+import ToggleLit from "../ToggleLit";
+
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -24,11 +26,9 @@ import MailIcon from "@mui/icons-material/Mail";
 function NavBar() {
   const navigate = useNavigate();
 
-  //Nova implementação
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const mobileMenuId = "primary-search-account-menu-mobile";
@@ -121,14 +121,8 @@ function NavBar() {
           </Typography>
           <SearchBox />
           <Box sx={{ flexGrow: 1 }} />
+          <ToggleLit />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge color="error">☀️</Badge>
-            </IconButton>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -141,7 +135,6 @@ function NavBar() {
             <IconButton
               size="large"
               edge="end"
-              //aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
               //onClick={handleProfileMenuOpen}

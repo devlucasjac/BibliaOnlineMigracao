@@ -11,6 +11,9 @@ import CurrentBook from "./context/CurrentBook";
 import Books from "./context/Books";
 import BibleResults from "./context/BibleResults";
 import FontStyle from "./context/FontStyle";
+import DarkMode from "./context/DarkMode";
+
+import { GlobalStyle } from "./Style.js";
 
 import "./App.css";
 
@@ -31,6 +34,7 @@ function App() {
 
   const [books, setBooks] = useState();
   const [results, setResults] = useState();
+  const [isLit, setIsLit] = useState(true);
   const [font, setFont] = useState(() => {
     if (fontStyle !== null) {
       return fontStyle;
@@ -49,23 +53,22 @@ function App() {
     return { bible: "ARA", book: 1, chapterNum: 1 };
   });
 
-  useEffect(() => {
-    console.log("abriu");
-  });
-
   return (
     <>
       <CurrentBook.Provider value={{ currentBook, setCurrentBook }}>
         <Books.Provider value={{ books, setBooks }}>
           <BibleResults.Provider value={{ results, setResults }}>
             <FontStyle.Provider value={{ font, setFont }}>
-              <Router>
-                <NavBar />
-                <Routes>
-                  <Route exact path="/" element={<Bible />} />
-                  <Route exact path="/pesquisa" element={<BibleSearch />} />
-                </Routes>
-              </Router>
+              <DarkMode.Provider value={{ isLit, setIsLit }}>
+                <GlobalStyle />
+                <Router>
+                  <NavBar />
+                  <Routes>
+                    <Route exact path="/" element={<Bible />} />
+                    <Route exact path="/pesquisa" element={<BibleSearch />} />
+                  </Routes>
+                </Router>
+              </DarkMode.Provider>
             </FontStyle.Provider>
           </BibleResults.Provider>
         </Books.Provider>

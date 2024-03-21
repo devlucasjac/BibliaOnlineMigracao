@@ -28,7 +28,7 @@ function Bible() {
   }, [currentBook.bible]);
 
   return (
-    <div>
+    <>
       {books ? (
         <>
           <RandomVerse />
@@ -37,7 +37,7 @@ function Bible() {
       ) : (
         <Loading />
       )}
-    </div>
+    </>
   );
 }
 
