@@ -4,16 +4,23 @@ import { useContext } from "react";
 
 import parse from "html-react-parser";
 
-import { StyledVerse } from "./style.js";
+import { StyledVerse, VerseContainer } from "./style.js";
 
 import FontStyle from "../../../context/FontStyle";
+import DarkMode from "../../../context/DarkMode.js";
 
 function ShowVerse({ verse }) {
   const { font } = useContext(FontStyle);
+  const { isLit } = useContext(DarkMode);
 
   return (
-    <div style={{ margin: "5px" }}>
-      <StyledVerse variant="span" bold={font.bold} size={font.size}>
+    <VerseContainer isLit={isLit}>
+      <StyledVerse
+        variant="span"
+        bold={font.bold}
+        size={font.size}
+        isLit={isLit}
+      >
         <Typography
           variant="span"
           style={{
@@ -29,7 +36,7 @@ function ShowVerse({ verse }) {
         </Typography>
         {parse(verse.text)}
       </StyledVerse>
-    </div>
+    </VerseContainer>
   );
 }
 
