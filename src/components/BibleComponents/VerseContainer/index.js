@@ -7,9 +7,14 @@ import ShowVerse from "../ShowVerse";
 import { useContext } from "react";
 
 import Books from "../../../context/Books";
+import DarkMode from "../../../context/DarkMode.js";
+
+import { StyledCard } from "./style.js";
 
 function VerseContainer({ verse, title, handleClick }) {
   const { books } = useContext(Books);
+  const { isLit } = useContext(DarkMode);
+
   function findBook(bookid) {
     if (books.find((book) => book.bookid === bookid) === undefined) {
       return "livro não encontrado 😢";
@@ -20,11 +25,11 @@ function VerseContainer({ verse, title, handleClick }) {
   return (
     <>
       {verse.verse ? (
-        <Card
-          sx={{ margin: "50px auto", maxWidth: "80%" }}
+        <StyledCard
           onClick={() => {
             handleClick !== undefined && handleClick(verse);
           }}
+          isLit={isLit}
         >
           <CardContent>
             {title && <Typography variant="h5">{title}</Typography>}
@@ -36,7 +41,7 @@ function VerseContainer({ verse, title, handleClick }) {
             </Typography>
             <ShowVerse verse={verse} />
           </CardContent>
-        </Card>
+        </StyledCard>
       ) : (
         <div>Verso não encontrado</div>
       )}
