@@ -9,7 +9,7 @@ import { useContext } from "react";
 import Books from "../../../context/Books";
 import DarkMode from "../../../context/DarkMode.js";
 
-import { StyledCard } from "./style.js";
+import { StyledCard, StyledText } from "./style.js";
 
 function VerseContainer({ verse, title, handleClick }) {
   const { books } = useContext(Books);
@@ -32,13 +32,21 @@ function VerseContainer({ verse, title, handleClick }) {
           isLit={isLit}
         >
           <CardContent>
-            {title && <Typography variant="h5">{title}</Typography>}
-            <Typography variant="h6">
+            {title && (
+              <StyledText isLit={isLit} variant="h5">
+                {title}
+              </StyledText>
+            )}
+            <StyledText isLit={isLit} variant="h6">
               Livro:{findBook(verse.book).name}
-            </Typography>
-            <Typography variant="p" sx={{ display: "block", margin: "5px" }}>
+            </StyledText>
+            <StyledText
+              isLit={isLit}
+              variant="p"
+              sx={{ display: "block", margin: "5px" }}
+            >
               Capitulo:{verse.chapter}
-            </Typography>
+            </StyledText>
             <ShowVerse verse={verse} />
           </CardContent>
         </StyledCard>
