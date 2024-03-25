@@ -1,14 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 import CurrentBook from "../../../context/CurrentBook";
+import DarkMode from "../../../context/DarkMode.js";
 
-import { StyledMark } from "./styles";
-
-import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
-import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
+import { StyledMark, StyledMarked, StyledUnMarked } from "./styles";
 
 function Bookmark() {
   const { currentBook } = useContext(CurrentBook);
+  const { isLit } = useContext(DarkMode);
+
   const localChapter = window.localStorage.getItem("ChapterNum");
   const [savedBible, setSavedBible] = useState(localChapter);
 
@@ -23,9 +23,9 @@ function Bookmark() {
       }}
     >
       {currentBook.chapterNum == savedBible ? (
-        <BookmarkAddedIcon />
+        <StyledMarked isLit={isLit} />
       ) : (
-        <BookmarkAddIcon />
+        <StyledUnMarked isLit={isLit} />
       )}
     </StyledMark>
   );

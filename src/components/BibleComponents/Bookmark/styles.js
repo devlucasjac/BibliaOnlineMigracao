@@ -1,10 +1,21 @@
 import styled from "styled-components";
 
+import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
+import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
+
 export const StyledMark = styled.div`
   transition: transform 0.5s;
   &:hover {
     transform: scale(1.1);
   }
+`;
+
+export const StyledMarked = styled(BookmarkAddedIcon)`
+  color: ${(props) => (props.isLit === true ? `var(--black)` : `var(--white)`)};
+`;
+
+export const StyledUnMarked = styled(BookmarkAddIcon)`
+  color: ${(props) => (props.isLit === true ? `var(--black)` : `var(--white)`)};
 `;
 
 export const StyledDiv = styled.div`
