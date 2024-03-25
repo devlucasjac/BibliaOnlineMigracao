@@ -3,17 +3,20 @@ import { BASE_URL } from "../../../configs";
 
 import CurrentBook from "../../../context/CurrentBook";
 import Books from "../../../context/Books";
+import DarkMode from "../../../context/DarkMode.js";
 
 import ShowVerse from "../ShowVerse/index";
 import HeaderBible from "../HeaderBible/index";
 import Bookmark from "../Bookmark/index";
 
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 
+import { StyledBible, StyledTitle } from "./style.js";
+
 function BibleReader() {
   const { currentBook, setCurrentBook } = useContext(CurrentBook);
+  const { isLit } = useContext(DarkMode);
   const { books } = useContext(Books);
 
   const [chapter, setChapter] = useState();
@@ -87,7 +90,7 @@ function BibleReader() {
   return (
     <>
       {chapter && book && (
-        <Card sx={{ maxWidth: "80%", margin: "0 auto" }}>
+        <StyledBible isLit={isLit}>
           <CardContent
             sx={{
               backgroundColor: "black",
@@ -107,9 +110,9 @@ function BibleReader() {
             <Bookmark />
           </CardContent>
           <CardContent>
-            <h2 style={{ marginBottom: "15px" }}>
+            <StyledTitle variant="h4" isLit={isLit}>
               {book.name}: {currentBook.chapterNum}
-            </h2>
+            </StyledTitle>
             <article style={{ padding: "20px" }}>
               {chapter.map((verse) => (
                 <ShowVerse verse={verse} key={verse.id} />
@@ -143,7 +146,7 @@ function BibleReader() {
               Proximo
             </Button>
           </CardContent>
-        </Card>
+        </StyledBible>
       )}
     </>
   );

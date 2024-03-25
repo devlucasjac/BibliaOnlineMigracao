@@ -5,7 +5,7 @@ import BibleSearch from "./pages/BibleSearch/index";
 
 import NavBar from "./components/GeneralComponents/NavBar/index";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import CurrentBook from "./context/CurrentBook";
 import Books from "./context/Books";

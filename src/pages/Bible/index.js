@@ -10,7 +10,7 @@ import { BASE_URL } from "../../configs";
 import { useEffect, useContext } from "react";
 
 function Bible() {
-  const { currentBook, setCurrentBook } = useContext(CurrentBook);
+  const { currentBook } = useContext(CurrentBook);
   const { books, setBooks } = useContext(Books);
 
   useEffect(() => {
