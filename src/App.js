@@ -60,7 +60,7 @@ function App() {
           <BibleResults.Provider value={{ results, setResults }}>
             <FontStyle.Provider value={{ font, setFont }}>
               <DarkMode.Provider value={{ isLit, setIsLit }}>
-                <GlobalStyle />
+                <GlobalStyle isLit={isLit} />
                 <Router>
                   <NavBar />
                   <Routes>

@@ -5,6 +5,8 @@ export const GlobalStyle = createGlobalStyle`
     padding-top: 4%;
     padding-bottom: 2%;
     background-color: var(--gray-100);
+    background-color: ${(props) =>
+      props.isLit === true ? `var(--gray-100)` : `var(--gray-1000)`};
   }
 
   * {
