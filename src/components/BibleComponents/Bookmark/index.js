@@ -9,9 +9,25 @@ function Bookmark() {
   const { currentBook } = useContext(CurrentBook);
   const { isLit } = useContext(DarkMode);
 
+  const localBible = window.localStorage.getItem("Bible");
+  const localBook = parseInt(window.localStorage.getItem("Book"));
   const localChapter = window.localStorage.getItem("ChapterNum");
-  const [savedBible, setSavedBible] = useState(localChapter);
-
+  const [savedBible, setSavedBible] = useState({
+    bible: localBible,
+    book: localBook,
+    chapterNum: localChapter,
+  });
+  function checkChapter() {
+    let isEqual = false;
+    if (
+      savedBible.bible == currentBook.bible &&
+      savedBible.book == currentBook.book &&
+      savedBible.chapterNum == currentBook.chapterNum
+    ) {
+      isEqual = true;
+    }
+    return isEqual;
+  }
   return (
     <StyledMark
       style={{ style: "unset" }}
@@ -22,7 +38,7 @@ function Bookmark() {
         window.localStorage.setItem("ChapterNum", currentBook.chapterNum);
       }}
     >
-      {currentBook.chapterNum == savedBible ? (
+      {checkChapter() ? (
         <StyledMarked isLit={isLit} />
       ) : (
         <StyledUnMarked isLit={isLit} />
