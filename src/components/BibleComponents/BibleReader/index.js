@@ -31,8 +31,7 @@ function BibleReader() {
 
   const book = findBook(currentBook.book);
 
-  useEffect(() => {
-    console.log("abriu biblia");
+  useEffect(() => {    
     const xhr = new XMLHttpRequest();
     xhr.open(
       "GET",

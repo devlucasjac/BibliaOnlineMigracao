@@ -2,10 +2,13 @@ import CardContent from "@mui/material/CardContent";
 
 import ShowVerse from "../ShowVerse";
 
+import parse from "html-react-parser";
+
 import { useContext } from "react";
 
 import Books from "../../../context/Books";
 import DarkMode from "../../../context/DarkMode.js";
+import ShareTextButton from "../../GeneralComponents/ShareTextButton/index.js";
 
 import { StyledCard, StyledText } from "./style.js";
 
@@ -46,6 +49,7 @@ function VerseContainer({ verse, title, handleClick }) {
               Capitulo:{verse.chapter}
             </StyledText>
             <ShowVerse verse={verse} />
+            <ShareTextButton text={parse(verse.text)}/>
           </CardContent>
         </StyledCard>
       ) : (

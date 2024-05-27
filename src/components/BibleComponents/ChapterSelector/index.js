@@ -31,7 +31,7 @@ function ChapterSelector({ showSelector }) {
       ...currentBook,
       chapterNum: e.target.value,
     });
-    console.log(e.target.value);
+    
     showSelector(false);
   }
 
