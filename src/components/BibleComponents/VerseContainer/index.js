@@ -16,6 +16,10 @@ function VerseContainer({ verse, title, handleClick }) {
   const { books } = useContext(Books);
   const { isLit } = useContext(DarkMode);
 
+  const textImage = parse(`${verse.text}
+  
+  ${findBook(verse.book).name}${verse.chapter}:${verse.verse}`)
+
   function findBook(bookid) {
     if (books.find((book) => book.bookid === bookid) === undefined) {
       return "livro não encontrado 😢";
@@ -49,7 +53,7 @@ function VerseContainer({ verse, title, handleClick }) {
               Capitulo:{verse.chapter}
             </StyledText>
             <ShowVerse verse={verse} />
-            <ShareTextButton text={parse(verse.text)}/>
+            <ShareTextButton text={textImage}/>
           </CardContent>
         </StyledCard>
       ) : (
