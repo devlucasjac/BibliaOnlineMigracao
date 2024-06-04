@@ -12,6 +12,8 @@ function RandomVerse() {
   const [verse, setVerse] = useState();
   const { currentBook } = useContext(CurrentBook);
 
+
+  
   useEffect(() => {
     console.log("abriu verso");
 
@@ -31,7 +33,7 @@ function RandomVerse() {
   return (
     <section>
       {verse ? (
-        <VerseContainer verse={verse} title="Palavra do dia" />
+        <VerseContainer verse={verse} canva={true} title="Palavra do dia" />
       ) : (
         <Loading />
       )}

@@ -2,9 +2,11 @@ import React, { useRef,useEffect } from "react"
 
 import { fabric } from 'fabric';
 
+import ShareButtons from "../ShareButtons";
+
 import cidade from "../../../img/bgImg/cidade.png"
 
-function ShareTextButton({text}){
+function CanvasContainer({text}){
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -39,25 +41,12 @@ function ShareTextButton({text}){
       });
     }, [text]);    
 
-    const exportImage = () => {
-        const canvas = canvasRef.current;
-        const dataUrl = canvas.toDataURL({
-          format: 'png',
-          quality: 1,
-        });
-        const link = document.createElement('a');
-        link.href = dataUrl;
-        link.download = 'composed-image.png';
-        link.click();
-      };
+   
 
     return <div>   
             <canvas ref={canvasRef}></canvas>     
-            <button onClick={exportImage}>
-                Compartilha
-            </button>
+            <ShareButtons canva={canvasRef}/>
         </div>
 }
 
-
-export default ShareTextButton
+export default CanvasContainer

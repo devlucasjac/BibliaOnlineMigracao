@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+#BgImgs
+/src/img/bgImg
+
 # testing
 /coverage
 
