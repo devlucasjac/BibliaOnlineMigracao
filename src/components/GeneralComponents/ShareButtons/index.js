@@ -4,27 +4,39 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 import { IconsContainer } from './style';
 
-function ShareButtons({canva}){
-    
-    const canvas = canva.current;
-    const dataUrl = canvas.toDataURL({
-      format: 'png',
-      quality: 1,
-    });
+function ShareButtons({canva}){   
 
     const downloadImage = () => {
+      const canvas = canva.current;
+      const dataUrl = canvas.toDataURL({
+        format: 'png',
+        quality: 1,
+      });
+
         const link = document.createElement('a');
         link.href = dataUrl;
         link.download = 'composed-image.png';
         link.click();
     };
 
-    const handleWhats = () => {       
+    const handleWhats = () => {  
+      const canvas = canva.current;
+      const dataUrl = canvas.toDataURL({
+        format: 'png',
+        quality: 1,
+      });
+      
         const whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(dataUrl)}`;
         window.open(whatsappURL, '_blank');
       };
 
-    const handleShare = () => {                 
+    const handleShare = () => {  
+        const canvas = canva.current;
+        const dataUrl = canvas.toDataURL({
+          format: 'png',
+          quality: 1,
+        });
+      
         fetch(dataUrl)
           .then(res => res.blob())
           .then(blob => {
@@ -43,9 +55,9 @@ function ShareButtons({canva}){
     };
 
     return <IconsContainer>           
-        <DownloadIcon onClick={downloadImage}/>
-        <WhatsAppIcon onClick={handleWhats}/>        
-        <ShareIcon onClick={handleShare}/>
+        <DownloadIcon onClick={downloadImage} style={{marginLeft:'30px'}}/>
+        <WhatsAppIcon onClick={handleWhats} style={{marginLeft:'30px'}}/>        
+        <ShareIcon onClick={handleShare} style={{marginLeft:'30px'}}/>
     </IconsContainer>
 }
 

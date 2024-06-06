@@ -8,7 +8,7 @@ import { useContext } from "react";
 
 import Books from "../../../context/Books";
 import DarkMode from "../../../context/DarkMode.js";
-import ShareTextButton from "../../GeneralComponents/CanvasContainer/index.js";
+import CanvasContainer from "../../GeneralComponents/CanvasContainer/index.js";
 
 import { StyledCard, StyledText } from "./style.js";
 
@@ -42,7 +42,7 @@ function VerseContainer({ verse, title, handleClick, canva }) {
                   {title}
                 </StyledText>
               )}
-            {canva ? <ShareTextButton text={textImage}/>: <>              
+            {canva ? <CanvasContainer text={textImage}/>: <>              
               <StyledText isLit={isLit} variant="h6">
                 Livro:{findBook(verse.book).name}
               </StyledText>

@@ -44,8 +44,11 @@ function CanvasContainer({text}){
    
 
     return <div>   
+      {canvasRef !== null &&<>
             <canvas ref={canvasRef}></canvas>     
             <ShareButtons canva={canvasRef}/>
+            </>
+      }
         </div>
 }
 
