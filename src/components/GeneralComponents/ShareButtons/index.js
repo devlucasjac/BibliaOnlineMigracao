@@ -32,6 +32,7 @@ function ShareButtons({canva}){
 
     const handleShare = () => {  
         const canvas = canva.current;
+        console.log(canva.current)
         const dataUrl = canvas.toDataURL({
           format: 'png',
           quality: 1,

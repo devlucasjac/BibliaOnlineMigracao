@@ -33,7 +33,7 @@ function RandomVerse() {
   return (
     <section>
       {verse ? (
-        <VerseContainer verse={verse} canva={true} />
+        <VerseContainer verse={verse} canva={true}/>
       ) : (
         <Loading />
       )}

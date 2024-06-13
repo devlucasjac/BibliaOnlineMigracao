@@ -6,10 +6,11 @@ import ShareButtons from "../ShareButtons";
 
 import cidade from "../../../img/bgImg/cidade.png"
 
-function CanvasContainer({text}){
+function CanvasContainer({text,justShare}){
     const canvasRef = useRef(null);
 
     useEffect(() => {
+      console.log(text)
       const canvas = new fabric.Canvas(canvasRef.current, {
         width: 1000,
         height: 500,
@@ -44,10 +45,12 @@ function CanvasContainer({text}){
    
 
     return <div>   
-      {canvasRef !== null &&<>
-            <canvas ref={canvasRef}></canvas>     
+      {canvasRef !== null &&<>{
+          !justShare ? <>
+            <canvas ref={canvasRef}></canvas> 
             <ShareButtons canva={canvasRef}/>
-            </>
+          </>: <ShareButtons canva={canvasRef}/>
+          }</>
       }
         </div>
 }
