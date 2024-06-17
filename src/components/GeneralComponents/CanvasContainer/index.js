@@ -9,13 +9,10 @@ import cidade from "../../../img/bgImg/cidade.png"
 function CanvasContainer({text,justShare}){
     const canvasRef = useRef(null);
 
-    useEffect(() => {
-      console.log(text)
-      const canvas = new fabric.Canvas(canvasRef.current, {
-        width: 1000,
-        height: 500,
-      });
-  
+    useEffect(() => {      
+      const canvas = new fabric.Canvas(canvasRef.current);
+      canvas.setWidth(window.innerWidth*0.77);
+      canvas.setHeight(window.innerHeight*0.7);
       fabric.Image.fromURL(cidade, (img) => {
         img.set({
           left: 0,
@@ -28,8 +25,7 @@ function CanvasContainer({text,justShare}){
         const textbox = new fabric.Textbox(text, {
           left: canvas.width / 2,
           top: canvas.height / 2,
-          width: 800,
-          maxWidth: 800,
+          width: canvas.width*0.8,          
           originX: 'center',
           originY: 'center',
           fontSize: 30,
