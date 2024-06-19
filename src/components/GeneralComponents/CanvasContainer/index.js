@@ -6,7 +6,7 @@ import ShareButtons from "../ShareButtons";
 
 import cidade from "../../../img/bgImg/cidade.png"
 
-function CanvasContainer({text,justShare}){
+function CanvasContainer({text}){
     const canvasRef = useRef(null);
 
     useEffect(() => {      
@@ -41,14 +41,13 @@ function CanvasContainer({text,justShare}){
    
 
     return <div>   
-      {canvasRef !== null &&<>{
-          !justShare ? <>
+      {canvasRef !== null &&
+        <>          
             <canvas ref={canvasRef}></canvas> 
             <ShareButtons canva={canvasRef}/>
-          </>: <ShareButtons canva={canvasRef}/>
-          }</>
+        </>
       }
-        </div>
+    </div>
 }
 
 export default CanvasContainer

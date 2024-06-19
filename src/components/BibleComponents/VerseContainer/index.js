@@ -12,7 +12,7 @@ import CanvasContainer from "../../GeneralComponents/CanvasContainer/index.js";
 
 import { StyledCard, StyledText } from "./style.js";
 
-function VerseContainer({ verse, title, handleClick, canva, justShare}) {
+function VerseContainer({ verse, title, handleClick, canva}) {
   const { books } = useContext(Books);
   const { isLit } = useContext(DarkMode);
 
@@ -53,8 +53,7 @@ function VerseContainer({ verse, title, handleClick, canva, justShare}) {
               >
                 Capitulo:{verse.chapter}
               </StyledText>
-              <ShowVerse verse={verse} />  
-              {justShare && <CanvasContainer text={textImage} justShare={true}/>}            
+              <ShowVerse verse={verse} />                          
             </>}                      
           </CardContent>
         </StyledCard>

@@ -27,7 +27,7 @@ function BibleSearch() {
     <div>
       {results ? (
         results.map((result) => {
-          return <VerseContainer verse={result} handleClick={SendToChap} justShare={true} />;
+          return <VerseContainer verse={result} handleClick={SendToChap} />;
         })
       ) : (
         <Loading></Loading>
