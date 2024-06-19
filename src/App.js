@@ -12,6 +12,7 @@ import Books from "./context/Books";
 import BibleResults from "./context/BibleResults";
 import FontStyle from "./context/FontStyle";
 import DarkMode from "./context/DarkMode";
+import SelectedVerse from "./context/SelectedVerse.js";
 
 import { GlobalStyle } from "./Style.js";
 
@@ -32,6 +33,7 @@ function App() {
 
   const fontStyle = getObjectFromCookie();
 
+  const [selectedVerse,setSelectedVerse] = useState({book:"",verse:"",chapter:"",text:"",translation:""});
   const [books, setBooks] = useState();
   const [results, setResults] = useState();
   const [isLit, setIsLit] = useState(true);
@@ -60,6 +62,7 @@ function App() {
           <BibleResults.Provider value={{ results, setResults }}>
             <FontStyle.Provider value={{ font, setFont }}>
               <DarkMode.Provider value={{ isLit, setIsLit }}>
+                <SelectedVerse.Provider value={{ selectedVerse, setSelectedVerse }}>
                 <GlobalStyle isLit={isLit} />
                 <Router>
                   <NavBar />
@@ -68,6 +71,7 @@ function App() {
                     <Route exact path="/pesquisa" element={<BibleSearch />} />
                   </Routes>
                 </Router>
+                </SelectedVerse.Provider>
               </DarkMode.Provider>
             </FontStyle.Provider>
           </BibleResults.Provider>

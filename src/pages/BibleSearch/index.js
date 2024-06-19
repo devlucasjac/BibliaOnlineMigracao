@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 
 import BibleResults from "../../context/BibleResults";
 import CurrentBook from "../../context/CurrentBook";
+import SelectedVerse from "../../context/SelectedVerse";
 
 import Loading from "../../components/GeneralComponents/Loading";
 import VerseContainer from "../../components/BibleComponents/VerseContainer";
@@ -13,9 +14,13 @@ function BibleSearch() {
 
   const { results } = useContext(BibleResults);
   const { currentBook, setCurrentBook } = useContext(CurrentBook);
+  const { setSelectedVerse} = useContext(SelectedVerse);
 
   const SendToChap = (result) => {
     navigate("/");
+    const cleanText = result.text.replace(/<\/?[^>]+(>|$)/g, "");
+    setSelectedVerse({book:result.book,verse:result.verse,
+      chapter:result.chapter,text:cleanText,translation:result.translation})
     setCurrentBook({
       ...currentBook,
       book: result.book,

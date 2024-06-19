@@ -9,7 +9,8 @@ import cidade from "../../../img/bgImg/cidade.png"
 function CanvasContainer({text}){
     const canvasRef = useRef(null);
 
-    useEffect(() => {      
+    useEffect(() => {   
+      console.log(text)   
       const canvas = new fabric.Canvas(canvasRef.current);
       canvas.setWidth(window.innerWidth*0.77);
       canvas.setHeight(window.innerHeight*0.7);
