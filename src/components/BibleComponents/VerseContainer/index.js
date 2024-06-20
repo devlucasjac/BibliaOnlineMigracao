@@ -12,11 +12,12 @@ import CanvasContainer from "../../GeneralComponents/CanvasContainer/index.js";
 
 import { StyledCard, StyledText } from "./style.js";
 
-function VerseContainer({ verse, title, handleClick, canva}) {
+function VerseContainer({ verse, title, handleClick, canva, justShare}) {
   const { books } = useContext(Books);
   const { isLit } = useContext(DarkMode);
 
-  const textImage = parse(`${verse.text}
+  const cleanVerse = verse.text.replace(/<\/?[^>]+(>|$)/g, "");
+  const textImage = parse(`${cleanVerse}
   
   ${findBook(verse.book).name}${verse.chapter}:${verse.verse}`)
 
@@ -53,7 +54,8 @@ function VerseContainer({ verse, title, handleClick, canva}) {
               >
                 Capitulo:{verse.chapter}
               </StyledText>
-              <ShowVerse verse={verse} />                          
+              <ShowVerse verse={verse} />   
+              {justShare && <CanvasContainer text={textImage} justShare={justShare}/>}                       
             </>}                      
           </CardContent>
         </StyledCard>

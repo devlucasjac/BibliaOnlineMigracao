@@ -18,9 +18,9 @@ function BibleSearch() {
 
   const SendToChap = (result) => {
     navigate("/");
-    const cleanText = result.text.replace(/<\/?[^>]+(>|$)/g, "");
+    
     setSelectedVerse({book:result.book,verse:result.verse,
-      chapter:result.chapter,text:cleanText,translation:result.translation})
+      chapter:result.chapter,text:result.text,translation:result.translation})
     setCurrentBook({
       ...currentBook,
       book: result.book,
@@ -32,7 +32,7 @@ function BibleSearch() {
     <div>
       {results ? (
         results.map((result) => {
-          return <VerseContainer verse={result} handleClick={SendToChap} />;
+          return <VerseContainer verse={result} handleClick={SendToChap}/>;
         })
       ) : (
         <Loading></Loading>
