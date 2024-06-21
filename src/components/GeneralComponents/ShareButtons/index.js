@@ -1,10 +1,13 @@
-import ShareIcon from '@mui/icons-material/Share';
-import DownloadIcon from '@mui/icons-material/Download';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import { useState,useContext } from 'react';
+
+import { StyledDownload, StyledShare, StyledWhatsapp } from './style';
+
+import DarkMode from '../../../context/DarkMode';
 
 import { IconsContainer } from './style';
 
-function ShareButtons({canva}){   
+  function ShareButtons({canva}){   
+    const {isLit} = useContext(DarkMode)
 
     const downloadImage = () => {
       const canvas = canva.current;
@@ -56,9 +59,9 @@ function ShareButtons({canva}){
     };
 
     return <IconsContainer>           
-        <DownloadIcon onClick={downloadImage} style={{marginLeft:'30px'}}/>
-        <WhatsAppIcon onClick={handleWhats} style={{marginLeft:'30px'}}/>        
-        <ShareIcon onClick={handleShare} style={{marginLeft:'30px'}}/>
+        <StyledDownload onClick={downloadImage} isLit={isLit} style={{marginLeft:'30px'}}/>
+        <StyledWhatsapp onClick={handleWhats} isLit={isLit} style={{marginLeft:'30px'}}/>        
+        <StyledShare onClick={handleShare} isLit={isLit} style={{marginLeft:'30px'}}/>
     </IconsContainer>
 }
 
